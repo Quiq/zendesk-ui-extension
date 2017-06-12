@@ -4,7 +4,10 @@
     [class.selected]="ticket === selectedTicket"
     (mouseover)="onSelect(ticket)"
     (click)="gotoDetail()">
-    <span class="badge {{ticket.priority}} {{ticket.status}}">{{ticket.id}}</span> {{ticket.subject}}
+    <span
+      class="badge {{ticket.priority}} {{ticket.status}}"
+      md-tooltip="test tooltip">
+      {{ticket.id}}</span> {{ticket.subject}}
   </li>
 </ul>
 <div *ngIf="selectedTicket">

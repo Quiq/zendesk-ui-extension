@@ -9,6 +9,8 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
+var animations_1 = require("@angular/platform-browser/animations");
+var material_1 = require("@angular/material");
 var app_routing_module_1 = require("./app-routing.module");
 var app_component_1 = require("./app.component");
 var ticket_detail_component_1 = require("./ticket-detail.component");
@@ -30,6 +32,8 @@ AppModule = __decorate([
             forms_1.FormsModule,
             http_1.HttpModule,
             http_1.JsonpModule,
+            animations_1.BrowserAnimationsModule,
+            material_1.MdTooltipModule,
         ],
         declarations: [
             app_component_1.AppComponent,
