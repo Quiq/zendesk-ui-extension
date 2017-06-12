@@ -15,7 +15,6 @@ var ticket_detail_component_1 = require("./ticket-detail.component");
 var ticket_preview_component_1 = require("./ticket-preview.component");
 var tickets_component_1 = require("./tickets.component");
 var auth_service_1 = require("./auth.service");
-var dashboard_component_1 = require("./dashboard.component");
 var oauth_component_1 = require("./oauth.component");
 var AppModule = (function () {
     function AppModule() {
@@ -37,7 +36,6 @@ AppModule = __decorate([
             tickets_component_1.TicketsComponent,
             ticket_detail_component_1.TicketDetailComponent,
             ticket_preview_component_1.TicketPreviewComponent,
-            dashboard_component_1.DashboardComponent,
             oauth_component_1.OauthComponent
         ],
         bootstrap: [app_component_1.AppComponent]

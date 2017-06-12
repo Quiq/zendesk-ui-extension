@@ -10,7 +10,6 @@ import { TicketDetailComponent } from './ticket-detail.component';
 import { TicketPreviewComponent } from './ticket-preview.component';
 import { TicketsComponent } from './tickets.component';
 import { AuthService } from './auth.service';
-import { DashboardComponent } from './dashboard.component';
 import { OauthComponent } from './oauth.component';
 
 @NgModule({
@@ -27,7 +26,6 @@ import { OauthComponent } from './oauth.component';
     TicketsComponent,
     TicketDetailComponent,
     TicketPreviewComponent,
-    DashboardComponent,
     OauthComponent
   ],
   bootstrap:    [ AppComponent ]

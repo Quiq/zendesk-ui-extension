@@ -103,7 +103,6 @@ export class AuthService {
 
   private extractResults(res: Response) {
     let body = res.json();
-    console.log(body);
     return body.results || {};
   }
 
