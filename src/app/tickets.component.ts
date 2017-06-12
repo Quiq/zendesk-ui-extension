@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MdTooltipModule } from '@angular/material';
 import { Ticket } from './ticket';
 import { User } from './user';
 import { AuthService } from './auth.service';
