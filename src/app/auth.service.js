@@ -44,6 +44,9 @@ var AuthService = (function () {
     };
     AuthService.prototype.getTicketsByName = function (name) {
         var _this = this;
+        if (!localStorage.getItem('zen_token')) {
+            return Promise.reject("No access token available");
+        }
         this.userName = name;
         var headers = new http_1.Headers();
         headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));

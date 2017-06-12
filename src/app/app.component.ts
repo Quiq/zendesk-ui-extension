@@ -14,16 +14,6 @@ import { AuthService } from './auth.service';
   `
 })
 
-export class AppComponent implements OnInit{
+export class AppComponent {
   title = 'Zen Tickets';
-
-  constructor(private authService: AuthService) {}
-
-  ngOnInit(): void{
-    this.getAccess();
-  }
-
-  private getAccess(): void {
-    this.authService.getAccess();
-  }
 }

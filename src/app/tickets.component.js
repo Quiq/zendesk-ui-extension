@@ -17,6 +17,7 @@ var TicketsComponent = (function () {
         this.router = router;
     }
     TicketsComponent.prototype.ngOnInit = function () {
+        this.authService.getAccess();
         this.getData();
     };
     TicketsComponent.prototype.getData = function () {

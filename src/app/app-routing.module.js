@@ -12,11 +12,11 @@ var tickets_component_1 = require("./tickets.component");
 var ticket_detail_component_1 = require("./ticket-detail.component");
 var oauth_component_1 = require("./oauth.component");
 var routes = [
-    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: dashboard_component_1.DashboardComponent },
     { path: 'detail/:id', component: ticket_detail_component_1.TicketDetailComponent },
     { path: 'tickets', component: tickets_component_1.TicketsComponent },
-    { path: 'oauth', component: oauth_component_1.OauthComponent }
+    { path: 'oauth', component: oauth_component_1.OauthComponent },
+    { path: '', redirectTo: '/tickets', pathMatch: 'full' }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {

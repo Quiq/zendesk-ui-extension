@@ -6,11 +6,11 @@ import { TicketDetailComponent }  from './ticket-detail.component';
 import { OauthComponent } from './oauth.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard',  component: DashboardComponent },
   { path: 'detail/:id', component: TicketDetailComponent },
   { path: 'tickets',     component: TicketsComponent },
-  { path: 'oauth', component: OauthComponent }
+  { path: 'oauth', component: OauthComponent },
+  { path: '', redirectTo: '/tickets', pathMatch: 'full' }
 ];
 
 @NgModule({

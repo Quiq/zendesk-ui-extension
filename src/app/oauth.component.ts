@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'oauth',
@@ -7,11 +8,12 @@ import { Component, OnInit } from '@angular/core';
 
 export class OauthComponent implements OnInit {
   private tokenRE = /#access_token=(\w*)&/;
-  private redirectUri = 'https://e2cea7a2.ngrok.io';
+
+  constructor(private router:Router){}
 
   ngOnInit(): void{
     let hasToken = window.location.href.match(this.tokenRE);
     localStorage.setItem('zen_token', hasToken[1]);
-    window.location.replace(this.redirectUri);
+    this.router.navigateByUrl('/tickets');
   }
 }

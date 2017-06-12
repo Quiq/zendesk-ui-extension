@@ -46,6 +46,9 @@ export class AuthService {
   }
 
   getTicketsByName(name: string): Promise<Ticket[]> {
+    if (!localStorage.getItem('zen_token')) {
+      return Promise.reject("No access token available");
+    }
     this.userName = name;
     let headers = new Headers();
     headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
