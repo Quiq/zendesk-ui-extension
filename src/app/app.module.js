@@ -12,6 +12,7 @@ var http_1 = require("@angular/http");
 var app_routing_module_1 = require("./app-routing.module");
 var app_component_1 = require("./app.component");
 var ticket_detail_component_1 = require("./ticket-detail.component");
+var ticket_preview_component_1 = require("./ticket-preview.component");
 var tickets_component_1 = require("./tickets.component");
 var auth_service_1 = require("./auth.service");
 var dashboard_component_1 = require("./dashboard.component");
@@ -35,6 +36,7 @@ AppModule = __decorate([
             app_component_1.AppComponent,
             tickets_component_1.TicketsComponent,
             ticket_detail_component_1.TicketDetailComponent,
+            ticket_preview_component_1.TicketPreviewComponent,
             dashboard_component_1.DashboardComponent,
             oauth_component_1.OauthComponent
         ],

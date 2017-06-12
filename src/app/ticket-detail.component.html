@@ -1,6 +1,41 @@
 <div *ngIf='ticket'>
-  <h2>{{ticket.id}} details!</h2>
-  <div><label>id: </label>{{ticket.id}}</div>
-  <div><label>subject: </label>{{ticket.subject}}</div>
-  <div><label>description: </label>{{ticket.description}}</div>
+  <h2>Ticket {{ticket.id}} details:</h2>
+  <table>
+    <tr>
+      <th>TYPE</th>
+      <td>{{ticket.type}}</td>
+    </tr>
+    <tr>
+      <th>STATUS</th>
+      <td>{{ticket.status}}</td>
+    </tr>
+    <tr>
+      <th>PRIORITY</th>
+      <td>{{ticket.priority}}</td>
+    </tr>
+    <tr>
+      <th>SUBJECT</th>
+      <td>{{ticket.subject}}</td>
+    </tr>
+    <tr>
+      <th>DESCRIPTION</th>
+      <td>{{ticket.description}}</td>
+    </tr>
+    <tr>
+      <th>TAGS</th>
+      <td>{{[].concat.apply([], ticket.tags)}}</td>
+    </tr>
+    <tr>
+      <th>DATE CREATED</th>
+      <td>{{ticket.created_at}}</td>
+    </tr>
+    <tr>
+      <th>LAST UPDATED</th>
+      <td>{{ticket.updated_at}}</td>
+    </tr>
+    <tr *ngFor="let field of ticket.custom_fields">
+      <th>{{field.id}}</th>
+      <td>{{field.value}}</td>
+    </tr>
+  </table>
 </div>

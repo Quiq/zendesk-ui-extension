@@ -1,14 +1,12 @@
-<h2>My Tickets</h2>
-<ul class='heroes'>
+<h2 *ngIf="user">{{user.name}}'s Tickets</h2>
+<ul class='tickets'>
   <li *ngFor="let ticket of tickets"
     [class.selected]="ticket === selectedTicket"
-    (click)="onSelect(ticket)">
-    <span class="badge">{{ticket.id}}</span> {{ticket.subject}}
+    (mouseover)="onSelect(ticket)"
+    (click)="gotoDetail()">
+    <span class="badge {{ticket.priority}} {{ticket.status}}">{{ticket.id}}</span> {{ticket.subject}}
   </li>
 </ul>
 <div *ngIf="selectedTicket">
-  <h2>
-    {{selectedTicket.subject | uppercase}}
-  </h2>
-  <button (click)="gotoDetail()">View Details</button>
+  <ticket-preview [selectedTicket]="selectedTicket"></ticket-preview>
 </div>

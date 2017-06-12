@@ -7,57 +7,101 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise'
 
 import { Ticket } from './Ticket';
+import { User } from './User';
 
 @Injectable()
 export class AuthService {
-  private zenUrl = 'https://jetdog.zendesk.com/oauth/authorizations/new';
-  private zenQueryUrl = 'https://jetdog.zendesk.com/api/v2/search.json';
-  private redirectUri = 'http://localhost:3000/oauth';
-  private client_id = 'my_sample_app';
+  private localData = 'app/mock-ticket-data.json';
+  private myAuthUrl = 'https://d3v-jetdog.zendesk.com/oauth/authorizations/new';
+  private centAuthUrl = 'https://centricient.zendesk.com/oauth/authorizations/new';
+  private myQueryUrl = 'https://d3v-jetdog.zendesk.com/api/v2/search.json';
+  private centQueryUrl = 'https://centricient.zendesk.com/api/v2/search.json';
+  private redirectUri = 'https://e2cea7a2.ngrok.io/oauth';
+  private myClientId = 'zendeskCustomerLookup';
+  private centClientID = 'zendesk_ui_extension';
+
+  user: User;
+  userName: string;
+  phone: string;
+  tickets: Ticket[];
 
   constructor (private http: Http) {}
 
-  // getCheese(id: number): Promise<Cheese> {
-  //   return this.getCheeses()
-  //             .then(cheeses => cheeses.find(cheese => cheese.id === id));
-  // }
-  //
-  // getCheeses(): Promise<Cheese[]> {
-  //   return Promise.resolve(CHEESES);
-  // }
-
   getAccess(): void {
-    if (!localStorage.getItem('zen_token')){
+    if (!localStorage.getItem('zen_token')) {
       let params = new URLSearchParams();
       params.set('response_type', 'token');
-      params.set('client_id', this.client_id);
+      params.set('client_id', this.myClientId);
       params.set('scope', 'read');
       params.set('redirect_uri', this.redirectUri);
-      const windowHandle = window.location.replace(`${this.zenUrl}?${params.toString()}`);
+      const windowHandle = window.location.replace(`${this.myAuthUrl}?${params.toString()}`);
     }
   }
 
   getTicket(id: number): Promise<Ticket> {
-    return this.getTickets()
-              .then(tickets => tickets.find(ticket => ticket.id === id));
+    if (this.tickets) {
+      return Promise.resolve(this.tickets.find(ticket => ticket.id === id));
+    }
+    return Promise.reject("No tickets currently available");
   }
 
-  getTickets(): Promise<Ticket[]> {
+  getTicketsByName(name: string): Promise<Ticket[]> {
+    this.userName = name;
     let headers = new Headers();
     headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
 
-    const search_string = 'type:ticket requester:"Donkey Kong"';
+    const search_string = `type:ticket requester:${this.userName}`;
 
-    return this.http.get(`${this.zenQueryUrl}?query=${search_string}`, { headers: headers })
+    return this.http.get(`${this.myQueryUrl}?query=${search_string}`, { headers: headers })
                     .toPromise()
-                    .then(this.extractTickets)
+                    .then(this.extractResults)
+                    .then(tickets => this.tickets = tickets)
                     .catch(this.handleError);
   }
 
-  private extractTickets(res: Response) {
+  getUserByPhone(phoneNumber: string): Promise<User> {
+    this.phone = phoneNumber;
+    let headers = new Headers();
+    headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
+
+    const search_string = `type:user phone:${this.phone}`;
+
+    return this.http.get(`${this.myQueryUrl}?query=${search_string}`, { headers: headers })
+                    .toPromise()
+                    .then(this.extractResults)
+                    .then(user => this.user = user)
+                    .catch(this.handleError);
+  }
+
+  getTicketsByPhone(phoneNumber: string): Promise<Ticket[]> {
+    this.phone = phoneNumber;
+    let headers = new Headers();
+    headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
+
+    const search_string = `type:user phone:${this.phone}`;
+
+    return this.http.get(`${this.myQueryUrl}?query=${search_string}`, { headers: headers })
+                    .toPromise()
+                    .then(response => this.userName = response.json().results.name)
+                    .then(() => this.getTicketsByName(this.userName))
+                    .catch(this.handleError);
+  }
+
+  getUserById(id: number): Promise<User> {
+    let tempUser: User = new User();
+    tempUser.id = 1;
+    tempUser.name = "Donkey Kong";
+    return Promise.resolve(tempUser);
+  }
+
+  getLocalTickets(): Promise<Ticket[]> {
+    return this.http.get(this.localData).toPromise().then(this.extractResults).then(tickets => this.tickets = tickets);
+  }
+
+  private extractResults(res: Response) {
     let body = res.json();
     console.log(body);
-    return body.data || {};
+    return body.results || {};
   }
 
   private handleError (error: | any): Promise<any> {  // TODO: IMPROVE THIS

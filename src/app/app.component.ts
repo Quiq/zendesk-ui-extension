@@ -23,7 +23,7 @@ export class AppComponent implements OnInit{
     this.getAccess();
   }
 
-  getAccess(): void {
+  private getAccess(): void {
     this.authService.getAccess();
   }
 }

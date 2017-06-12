@@ -9,7 +9,7 @@ var core_1 = require("@angular/core");
 var OauthComponent = (function () {
     function OauthComponent() {
         this.tokenRE = /#access_token=(\w*)&/;
-        this.redirectUri = 'http://localhost:3000';
+        this.redirectUri = 'https://e2cea7a2.ngrok.io';
     }
     OauthComponent.prototype.ngOnInit = function () {
         var hasToken = window.location.href.match(this.tokenRE);

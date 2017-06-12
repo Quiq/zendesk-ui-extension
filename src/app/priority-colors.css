@@ -1,0 +1,9 @@
+.module.low, .tickets .badge.low, .module.normal, .tickets .badge.normal {
+  background-color: #4286f4;
+}
+.module.high, .tickets .badge.high, .module.urgent, .tickets .badge.urgent {
+  background-color: #e03333;
+}
+.module.closed, .module.solved, .tickets .badge.closed, .tickets .badge.solved {
+  background-color: #607D8B;
+}

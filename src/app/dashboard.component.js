@@ -17,8 +17,15 @@ var DashboardComponent = (function () {
     }
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.authService.getTickets()
-            .then(function (tickets) { return _this.tickets = tickets.slice(1, 4); });
+        this.authService.getTicketsByName("Donkey Kong")
+            .then(function (tickets) { return _this.tickets = tickets
+            .filter(function (ticket) { return ticket.status !== "solved" && ticket.status !== "closed"; })
+            .sort(function (a, b) { return +new Date(b.updated_at) - +new Date(a.updated_at); })
+            .slice(0, 4); })
+            .catch(function (err) { return console.error('An error has occurred', err); });
+    };
+    DashboardComponent.prototype.onSelect = function (ticket) {
+        this.selectedTicket = ticket;
     };
     return DashboardComponent;
 }());
@@ -26,7 +33,7 @@ DashboardComponent = __decorate([
     core_1.Component({
         selector: 'my-dashboard',
         templateUrl: './dashboard.component.html',
-        styleUrls: ['./dashboard.component.css']
+        styleUrls: ['./priority-colors.css', './dashboard.component.css']
     }),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], DashboardComponent);

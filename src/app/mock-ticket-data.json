@@ -1,0 +1,60 @@
+{
+  "results": [
+    {
+      "id": 1,
+      "type": "problem",
+      "subject": "a problem",
+      "description": "this is a new problem of normal priority",
+      "priority": "normal",
+      "status": "new",
+      "requester_id": 1,
+      "has_incidents": true,
+      "tags": ["service", "other_tag"],
+      "custom_fields": [{"id":1, "value":"custom field 1"}, {"id":2, "value":"custom field 2"}],
+      "created_at": "2017-06-01",
+      "updated_at": "2017-06-01"
+    },
+    {
+      "id": 2,
+      "type": "incident",
+      "subject": "an incident",
+      "description": "this is an open incident of high priority",
+      "priority": "high",
+      "status": "open",
+      "requester_id": 1,
+      "has_incidents": false,
+      "tags": ["service", "other_tag"],
+      "custom_fields": [{"id":1, "value":"custom"}],
+      "created_at": "2017-06-02",
+      "updated_at": "2017-06-02"
+    },
+    {
+      "id": 3,
+      "type": "question",
+      "subject": "a question",
+      "description": "this is a closed question of low priority",
+      "priority": "low",
+      "status": "closed",
+      "requester_id": 1,
+      "has_incidents": false,
+      "tags": ["service", "other_tag"],
+      "custom_fields": [{"id":1, "value":"custom"}],
+      "created_at": "2017-05-05",
+      "updated_at": "2017-05-06"
+    },
+    {
+      "id": 4,
+      "type": "task",
+      "subject": "a task",
+      "description": "this is a pending task of urgent priority",
+      "priority": "urgent",
+      "status": "pending",
+      "requester_id": 1,
+      "has_incidents": false,
+      "tags": ["service", "other_tag"],
+      "custom_fields": [{"id":1, "value":"custom"}],
+      "created_at": "2017-06-06",
+      "updated_at": "2017-06-07"
+    }
+  ]
+}

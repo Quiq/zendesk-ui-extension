@@ -1,8 +1,16 @@
-<h3>Top Tickets</h3>
+<h3>Most Recent Tickets</h3>
 <div class="grid grid-pad">
-  <a *ngFor="let ticket of tickets" [routerLink]="['/detail', ticket.id]" class="col-1-4">
-    <div class="module ticket">
-      <h4>{{ticket.subject}}</h4>
+  <a *ngFor="let ticket of tickets"
+    [routerLink]="['/detail', ticket.id]"
+    class="col-1-4"
+    [class.selected]="ticket === selectedTicket"
+    (mouseover)="onSelect(ticket)">
+    <div class="module ticket {{ticket.priority}} {{ticket.status}}">
+      <h4>{{ticket.updated_at | date:'short'}}</h4>
     </div>
   </a>
+</div>
+<div *ngIf="selectedTicket"
+  class="preview">
+  <ticket-preview [selectedTicket]="selectedTicket"></ticket-preview>
 </div>

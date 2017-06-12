@@ -19,13 +19,12 @@ var TicketsComponent = (function () {
     TicketsComponent.prototype.ngOnInit = function () {
         this.getData();
     };
-    TicketsComponent.prototype.getTicket = function () {
-        var _this = this;
-        this.authService.getTickets().then(function (tickets) { return _this.tickets = tickets; });
-    };
     TicketsComponent.prototype.getData = function () {
-        this.authService.getTickets()
-            .then(function (tickets) { return console.log("Data access success!"); })
+        var _this = this;
+        this.authService.getTicketsByName('Donkey Kong')
+            .then(function (tickets) { return _this.tickets = tickets; })
+            .then(function () { return _this.authService.getUserById(_this.tickets[1].id); })
+            .then(function (user) { return _this.user = user; })
             .catch(function (err) { return console.error('An error has occurred', err); });
     };
     TicketsComponent.prototype.onSelect = function (ticket) {
@@ -39,8 +38,8 @@ var TicketsComponent = (function () {
 TicketsComponent = __decorate([
     core_1.Component({
         selector: 'my-tickets',
-        templateUrl: "./tickets.component.html",
-        styleUrls: ['./tickets.component.css']
+        templateUrl: './tickets.component.html',
+        styleUrls: ['./priority-colors.css', './tickets.component.css']
     }),
     __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router])
 ], TicketsComponent);

@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Angular QuickStart</title>
+    <title>Zendesk Customer Lookup</title>
     <base href="/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-Equiv="Cache-Control" Content="no-cache" />
+    <meta http-Equiv="Pragma" Content="no-cache" />
+    <meta http-Equiv="Expires" Content="0" />
     <link rel="stylesheet" href="styles.css">
 
+    <!-- Quiq Extension SDK -->
+    <script src="node_modules/centricient-ui/sdk.js"></script>
     <!-- Polyfill(s) for older browsers -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
+
     <script src="node_modules/core-js/client/shim.min.js"></script>
 
     <script src="node_modules/zone.js/dist/zone.js"></script>
@@ -15,8 +22,10 @@
 
     <script src="systemjs.config.js"></script>
     <script>
-      System.import('main.js').catch(function(err){ console.error(err); });
-    </script>
+    System.import('main.js').catch(function(err) {
+  console.error(err);
+});
+</script>
   </head>
 
   <body>

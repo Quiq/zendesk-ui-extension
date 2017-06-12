@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent }  from './app.component';
 import { TicketDetailComponent } from './ticket-detail.component';
+import { TicketPreviewComponent } from './ticket-preview.component';
 import { TicketsComponent } from './tickets.component';
 import { AuthService } from './auth.service';
 import { DashboardComponent } from './dashboard.component';
@@ -25,6 +26,7 @@ import { OauthComponent } from './oauth.component';
     AppComponent,
     TicketsComponent,
     TicketDetailComponent,
+    TicketPreviewComponent,
     DashboardComponent,
     OauthComponent
   ],

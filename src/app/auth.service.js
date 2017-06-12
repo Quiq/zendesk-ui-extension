@@ -13,49 +13,85 @@ var http_1 = require("@angular/http");
 require("rxjs/add/operator/catch");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/toPromise");
+var User_1 = require("./User");
 var AuthService = (function () {
     function AuthService(http) {
         this.http = http;
-        this.zenUrl = 'https://jetdog.zendesk.com/oauth/authorizations/new';
-        this.zenQueryUrl = 'https://jetdog.zendesk.com/api/v2/search.json';
-        this.redirectUri = 'http://localhost:3000/oauth';
-        this.client_id = 'my_sample_app';
+        this.localData = 'app/mock-ticket-data.json';
+        this.myAuthUrl = 'https://d3v-jetdog.zendesk.com/oauth/authorizations/new';
+        this.centAuthUrl = 'https://centricient.zendesk.com/oauth/authorizations/new';
+        this.myQueryUrl = 'https://d3v-jetdog.zendesk.com/api/v2/search.json';
+        this.centQueryUrl = 'https://centricient.zendesk.com/api/v2/search.json';
+        this.redirectUri = 'https://e2cea7a2.ngrok.io/oauth';
+        this.myClientId = 'zendeskCustomerLookup';
+        this.centClientID = 'zendesk_ui_extension';
     }
-    // getCheese(id: number): Promise<Cheese> {
-    //   return this.getCheeses()
-    //             .then(cheeses => cheeses.find(cheese => cheese.id === id));
-    // }
-    //
-    // getCheeses(): Promise<Cheese[]> {
-    //   return Promise.resolve(CHEESES);
-    // }
     AuthService.prototype.getAccess = function () {
         if (!localStorage.getItem('zen_token')) {
             var params = new http_1.URLSearchParams();
             params.set('response_type', 'token');
-            params.set('client_id', this.client_id);
+            params.set('client_id', this.myClientId);
             params.set('scope', 'read');
             params.set('redirect_uri', this.redirectUri);
-            var windowHandle = window.location.replace(this.zenUrl + "?" + params.toString());
+            var windowHandle = window.location.replace(this.myAuthUrl + "?" + params.toString());
         }
     };
     AuthService.prototype.getTicket = function (id) {
-        return this.getTickets()
-            .then(function (tickets) { return tickets.find(function (ticket) { return ticket.id === id; }); });
+        if (this.tickets) {
+            return Promise.resolve(this.tickets.find(function (ticket) { return ticket.id === id; }));
+        }
+        return Promise.reject("No tickets currently available");
     };
-    AuthService.prototype.getTickets = function () {
+    AuthService.prototype.getTicketsByName = function (name) {
+        var _this = this;
+        this.userName = name;
         var headers = new http_1.Headers();
         headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
-        var search_string = 'type:ticket requester:"Donkey Kong"';
-        return this.http.get(this.zenQueryUrl + "?query=" + search_string, { headers: headers })
+        var search_string = "type:ticket requester:" + this.userName;
+        return this.http.get(this.myQueryUrl + "?query=" + search_string, { headers: headers })
             .toPromise()
-            .then(this.extractTickets)
+            .then(this.extractResults)
+            .then(function (tickets) { return _this.tickets = tickets; })
             .catch(this.handleError);
     };
-    AuthService.prototype.extractTickets = function (res) {
+    AuthService.prototype.getUserByPhone = function (phoneNumber) {
+        var _this = this;
+        this.phone = phoneNumber;
+        var headers = new http_1.Headers();
+        headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
+        var search_string = "type:user phone:" + this.phone;
+        return this.http.get(this.myQueryUrl + "?query=" + search_string, { headers: headers })
+            .toPromise()
+            .then(this.extractResults)
+            .then(function (user) { return _this.user = user; })
+            .catch(this.handleError);
+    };
+    AuthService.prototype.getTicketsByPhone = function (phoneNumber) {
+        var _this = this;
+        this.phone = phoneNumber;
+        var headers = new http_1.Headers();
+        headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
+        var search_string = "type:user phone:" + this.phone;
+        return this.http.get(this.myQueryUrl + "?query=" + search_string, { headers: headers })
+            .toPromise()
+            .then(function (response) { return _this.userName = response.json().results.name; })
+            .then(function () { return _this.getTicketsByName(_this.userName); })
+            .catch(this.handleError);
+    };
+    AuthService.prototype.getUserById = function (id) {
+        var tempUser = new User_1.User();
+        tempUser.id = 1;
+        tempUser.name = "Donkey Kong";
+        return Promise.resolve(tempUser);
+    };
+    AuthService.prototype.getLocalTickets = function () {
+        var _this = this;
+        return this.http.get(this.localData).toPromise().then(this.extractResults).then(function (tickets) { return _this.tickets = tickets; });
+    };
+    AuthService.prototype.extractResults = function (res) {
         var body = res.json();
         console.log(body);
-        return body.data || {};
+        return body.results || {};
     };
     AuthService.prototype.handleError = function (error) {
         console.error("An error has occurred", error);
