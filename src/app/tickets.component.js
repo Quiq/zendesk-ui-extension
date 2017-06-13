@@ -22,11 +22,28 @@ var TicketsComponent = (function () {
     };
     TicketsComponent.prototype.getData = function () {
         var _this = this;
-        this.authService.getTicketsByName('Donkey Kong')
+        var a = this.authService.getTicketsByName('Donkey Kong')
             .then(function (tickets) { return _this.tickets = tickets; })
+            .then(this.appendIcons)
             .then(function () { return _this.authService.getUserById(_this.tickets[1].id); })
             .then(function (user) { return _this.user = user; })
             .catch(function (err) { return console.error('An error has occurred', err); });
+    };
+    TicketsComponent.prototype.appendIcons = function (tickets) {
+        // TODO: parse this from ticket.subject or ticket.rawsubject
+        for (var _i = 0, tickets_1 = tickets; _i < tickets_1.length; _i++) {
+            var ticket = tickets_1[_i];
+            switch (ticket.via.channel) {
+                case "web":
+                    ticket.icon = "envelope-o";
+                    break;
+                case "mobile":
+                    ticket.icon = "mobile";
+                    break;
+                default:
+                    ticket.icon = "bath";
+            }
+        }
     };
     TicketsComponent.prototype.onSelect = function (ticket) {
         this.selectedTicket = ticket;

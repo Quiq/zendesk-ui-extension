@@ -6,9 +6,8 @@
     (click)="gotoDetail()"
     md-tooltip="{{toolTipText}}">
     <span
-      class="badge {{ticket.priority}} {{ticket.status}}"
+      class="badge {{ticket.priority}} {{ticket.status}} fa fa-{{ticket.icon}}"
       md-tooltip="{{ticket.priority}} priority">
-      {{ticket.id}}
     </span>
     {{ticket.subject}}
   </li>

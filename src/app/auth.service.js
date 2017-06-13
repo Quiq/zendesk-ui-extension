@@ -93,6 +93,7 @@ var AuthService = (function () {
     };
     AuthService.prototype.extractResults = function (res) {
         var body = res.json();
+        console.log(body);
         return body.results || {};
     };
     AuthService.prototype.handleError = function (error) {

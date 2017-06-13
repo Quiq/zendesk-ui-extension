@@ -31,4 +31,5 @@ export class Ticket {
   is_public: boolean;
   created_at: any; //date
   updated_at: any; //date
+  icon: string; // custom field for font awesome icons
 }
