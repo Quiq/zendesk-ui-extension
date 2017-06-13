@@ -3,13 +3,13 @@
   <li *ngFor="let ticket of tickets"
     [class.selected]="ticket === selectedTicket"
     (mouseover)="onSelect(ticket)"
-    (click)="gotoDetail()">
+    (click)="gotoDetail()"
+    md-tooltip="{{toolTipText}}">
     <span
       class="badge {{ticket.priority}} {{ticket.status}}"
-      md-tooltip="test tooltip">
-      {{ticket.id}}</span> {{ticket.subject}}
+      md-tooltip="{{ticket.priority}} priority">
+      {{ticket.id}}
+    </span>
+    {{ticket.subject}}
   </li>
 </ul>
-<div *ngIf="selectedTicket">
-  <ticket-preview [selectedTicket]="selectedTicket"></ticket-preview>
-</div>
