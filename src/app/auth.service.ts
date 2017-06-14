@@ -38,12 +38,12 @@ export class AuthService {
     }
   }
 
-  getTicket(id: number): Promise<Ticket> {
-    if (this.tickets) {
-      return Promise.resolve(this.tickets.find(ticket => ticket.id === id));
-    }
-    return Promise.reject("No tickets currently available");
-  }
+  // getTicket(id: number): Promise<Ticket> {
+  //   if (this.tickets) {
+  //     return Promise.resolve(this.tickets.find(ticket => ticket.id === id));
+  //   }
+  //   return Promise.reject("No tickets currently available");
+  // }
 
   getTicketsByName(name: string): Promise<Ticket[]> {
     if (!localStorage.getItem('zen_token')) {

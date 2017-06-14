@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdTooltipModule } from '@angular/material';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -24,6 +25,7 @@ import { OauthComponent } from './oauth.component';
     JsonpModule,
     BrowserAnimationsModule,
     MdTooltipModule,
+    NgbModule.forRoot(),
   ],
   declarations: [
     AppComponent,

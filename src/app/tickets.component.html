@@ -1,14 +1,18 @@
 <h2 *ngIf="user">{{user.name}}'s Tickets</h2>
-<ul class='tickets'>
-  <li *ngFor="let ticket of tickets"
+<ngb-accordion class='tickets'>
+  <ngb-panel *ngFor="let ticket of tickets"
     [class.selected]="ticket === selectedTicket"
-    (mouseover)="onSelect(ticket)"
-    (click)="gotoDetail()"
+    (click)="onSelect(ticket)"
     md-tooltip="{{toolTipText}}">
-    <span
-      class="badge {{ticket.priority}} {{ticket.status}} fa fa-{{ticket.icon}}"
-      md-tooltip="{{ticket.priority}} priority">
-    </span>
-    {{ticket.subject}}
-  </li>
-</ul>
+    <ng-template ngbPanelTitle>
+      <span
+        class="badge {{ticket.priority}} {{ticket.status}} fa fa-{{ticket.icon}}"
+        md-tooltip="{{ticket.priority}} priority">
+      </span>
+      {{ticket.subject}}
+    </ng-template>
+    <ng-template ngbPanelContent>
+      <ticket-detail [ticket]="ticket"></ticket-detail>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>

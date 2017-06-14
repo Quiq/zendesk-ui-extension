@@ -8,10 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var tickets_component_1 = require("./tickets.component");
-var ticket_detail_component_1 = require("./ticket-detail.component");
 var oauth_component_1 = require("./oauth.component");
 var routes = [
-    { path: 'detail/:id', component: ticket_detail_component_1.TicketDetailComponent },
     { path: 'tickets', component: tickets_component_1.TicketsComponent },
     { path: 'oauth', component: oauth_component_1.OauthComponent },
     { path: '', redirectTo: '/tickets', pathMatch: 'full' }

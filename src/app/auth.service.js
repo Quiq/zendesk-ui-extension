@@ -36,12 +36,12 @@ var AuthService = (function () {
             var windowHandle = window.location.replace(this.myAuthUrl + "?" + params.toString());
         }
     };
-    AuthService.prototype.getTicket = function (id) {
-        if (this.tickets) {
-            return Promise.resolve(this.tickets.find(function (ticket) { return ticket.id === id; }));
-        }
-        return Promise.reject("No tickets currently available");
-    };
+    // getTicket(id: number): Promise<Ticket> {
+    //   if (this.tickets) {
+    //     return Promise.resolve(this.tickets.find(ticket => ticket.id === id));
+    //   }
+    //   return Promise.reject("No tickets currently available");
+    // }
     AuthService.prototype.getTicketsByName = function (name) {
         var _this = this;
         if (!localStorage.getItem('zen_token')) {

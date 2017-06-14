@@ -48,9 +48,6 @@ var TicketsComponent = (function () {
     TicketsComponent.prototype.onSelect = function (ticket) {
         this.selectedTicket = ticket;
     };
-    TicketsComponent.prototype.gotoDetail = function () {
-        this.router.navigate(['/detail', this.selectedTicket.id]);
-    };
     return TicketsComponent;
 }());
 TicketsComponent = __decorate([

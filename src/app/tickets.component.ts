@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MdTooltipModule } from '@angular/material';
 import { Response } from '@angular/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { Ticket } from './ticket';
 import { User } from './user';
 import { AuthService } from './auth.service';
@@ -52,9 +54,5 @@ export class TicketsComponent implements OnInit {
 
   onSelect(ticket: Ticket): void {
     this.selectedTicket = ticket;
-  }
-
-  gotoDetail(): void {
-    this.router.navigate(['/detail', this.selectedTicket.id]);
   }
 }

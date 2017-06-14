@@ -11,6 +11,7 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var animations_1 = require("@angular/platform-browser/animations");
 var material_1 = require("@angular/material");
+var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var app_routing_module_1 = require("./app-routing.module");
 var app_component_1 = require("./app.component");
 var ticket_detail_component_1 = require("./ticket-detail.component");
@@ -34,6 +35,7 @@ AppModule = __decorate([
             http_1.JsonpModule,
             animations_1.BrowserAnimationsModule,
             material_1.MdTooltipModule,
+            ng_bootstrap_1.NgbModule.forRoot(),
         ],
         declarations: [
             app_component_1.AppComponent,
