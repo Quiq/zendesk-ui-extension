@@ -28,6 +28,16 @@
   background-color: #BBD8DC;
   color: white;
 }
+:host /deep/ .tickets .card-header a {
+  display: block;
+  padding: 10px 15px;
+  margin: -10px -15px;
+  color: #607D8B;
+  text-decoration: none;
+}
+:host /deep/ .collapsing {
+  transition: height 0.6s;
+}
 .tickets .badge {
   display: inline-block;
   font-size: small;
