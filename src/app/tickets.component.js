@@ -25,7 +25,9 @@ var TicketsComponent = (function () {
         var _this = this;
         var a = this.authService
             .getTicketsByName('Donkey Kong')
-            .then(function (tickets) { return (_this.tickets = tickets); })
+            .then(function (tickets) {
+            return (_this.tickets = tickets.sort(function (a, b) { return +new Date(b.updated_at) - +new Date(a.updated_at); }));
+        })
             .then(this.appendIcons)
             .then(function () { return _this.authService.getUserById(_this.tickets[1].id); })
             .then(function (user) { return (_this.user = user); })

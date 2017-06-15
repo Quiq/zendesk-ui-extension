@@ -29,7 +29,12 @@ export class TicketsComponent implements OnInit {
   getData(): void {
     const a = this.authService
       .getTicketsByName('Donkey Kong')
-      .then(tickets => (this.tickets = tickets))
+      .then(
+        tickets =>
+          (this.tickets = tickets.sort(
+            (a, b) => +new Date(b.updated_at) - +new Date(a.updated_at),
+          )),
+      )
       .then(this.appendIcons)
       .then(() => this.authService.getUserById(this.tickets[1].id))
       .then(user => (this.user = user))

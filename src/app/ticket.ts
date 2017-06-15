@@ -29,7 +29,7 @@ export class Ticket {
   brand_id: number;
   allow_channelback: boolean;
   is_public: boolean;
-  created_at: any; //date
-  updated_at: any; //date
+  created_at: string; //date
+  updated_at: string; //date
   icon: string; // custom field for font awesome icons
 }
