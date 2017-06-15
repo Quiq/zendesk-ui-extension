@@ -22,7 +22,6 @@ export class TicketsComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    console.log('ticket component initializing, getting access token');
     this.authService.getAccess();
     this.getData();
   }

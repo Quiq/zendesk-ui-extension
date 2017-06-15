@@ -1,6 +1,9 @@
 <div *ngIf='ticket'>
-  <h2>Ticket {{ticket.id}} details:</h2>
   <table>
+    <tr>
+      <th>ID</th>
+      <td>{{ticket.id}}</td>
+    </tr>
     <tr>
       <th>TYPE</th>
       <td>{{ticket.type}}</td>
@@ -27,11 +30,11 @@
     </tr>
     <tr>
       <th>DATE CREATED</th>
-      <td>{{ticket.created_at}}</td>
+      <td>{{ticket.created_at | date:'medium'}}</td>
     </tr>
     <tr>
       <th>LAST UPDATED</th>
-      <td>{{ticket.updated_at}}</td>
+      <td>{{ticket.updated_at | date:'medium'}}</td>
     </tr>
     <tr *ngFor="let field of ticket.custom_fields">
       <th>{{field.id}}</th>

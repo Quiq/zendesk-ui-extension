@@ -1,32 +1,9 @@
-table, tr, th, td{
+table, tr, th, td {
   text-align: left;
-  border: 1px solid black;
+  border: 1px solid #231f20;
   border-collapse: collapse;
 }
-th, td{
-  color: #607D8B;
-  font-weight: bold;
-  padding: .5em;
-}
-input {
-  height: 2em;
-  font-size: 1em;
-  padding-left: .4em;
-}
-button {
-  margin-top: 20px;
-  font-family: Arial;
-  background-color: #eee;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer; cursor: hand;
-}
-button:hover {
-  background-color: #cfd8dc;
-}
-button:disabled {
-  background-color: #eee;
-  color: #ccc;
-  cursor: auto;
+th, td {
+  color: #231f20;
+  padding: .2em;
 }

@@ -46,16 +46,17 @@ var AuthService = (function () {
     AuthService.prototype.getTicketsByName = function (name) {
         var _this = this;
         if (!localStorage.getItem('zen_token')) {
-            return Promise.reject("No access token available");
+            return Promise.reject('No access token available');
         }
         this.userName = name;
         var headers = new http_1.Headers();
         headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
         var search_string = "type:ticket requester:" + this.userName;
-        return this.http.get(this.myQueryUrl + "?query=" + search_string, { headers: headers })
+        return this.http
+            .get(this.myQueryUrl + "?query=" + search_string, { headers: headers })
             .toPromise()
             .then(this.extractResults)
-            .then(function (tickets) { return _this.tickets = tickets; })
+            .then(function (tickets) { return (_this.tickets = tickets); })
             .catch(this.handleError);
     };
     AuthService.prototype.getUserByPhone = function (phoneNumber) {
@@ -64,10 +65,11 @@ var AuthService = (function () {
         var headers = new http_1.Headers();
         headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
         var search_string = "type:user phone:" + this.phone;
-        return this.http.get(this.myQueryUrl + "?query=" + search_string, { headers: headers })
+        return this.http
+            .get(this.myQueryUrl + "?query=" + search_string, { headers: headers })
             .toPromise()
             .then(this.extractResults)
-            .then(function (user) { return _this.user = user; })
+            .then(function (user) { return (_this.user = user); })
             .catch(this.handleError);
     };
     AuthService.prototype.getTicketsByPhone = function (phoneNumber) {
@@ -76,29 +78,34 @@ var AuthService = (function () {
         var headers = new http_1.Headers();
         headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
         var search_string = "type:user phone:" + this.phone;
-        return this.http.get(this.myQueryUrl + "?query=" + search_string, { headers: headers })
+        return this.http
+            .get(this.myQueryUrl + "?query=" + search_string, { headers: headers })
             .toPromise()
-            .then(function (response) { return _this.userName = response.json().results.name; })
+            .then(function (response) { return (_this.userName = response.json().results.name); })
             .then(function () { return _this.getTicketsByName(_this.userName); })
             .catch(this.handleError);
     };
     AuthService.prototype.getUserById = function (id) {
         var tempUser = new User_1.User();
         tempUser.id = 1;
-        tempUser.name = "Donkey Kong";
+        tempUser.name = 'Donkey Kong';
         return Promise.resolve(tempUser);
     };
     AuthService.prototype.getLocalTickets = function () {
         var _this = this;
-        return this.http.get(this.localData).toPromise().then(this.extractResults).then(function (tickets) { return _this.tickets = tickets; });
+        return this.http
+            .get(this.localData)
+            .toPromise()
+            .then(this.extractResults)
+            .then(function (tickets) { return (_this.tickets = tickets); });
     };
     AuthService.prototype.extractResults = function (res) {
         var body = res.json();
-        console.log(body);
         return body.results || {};
     };
     AuthService.prototype.handleError = function (error) {
-        console.error("An error has occurred", error);
+        // TODO: IMPROVE THIS
+        console.error('An error has occurred', error);
         return Promise.reject(error.message || error);
     };
     AuthService = __decorate([

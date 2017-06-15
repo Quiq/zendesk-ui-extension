@@ -17,7 +17,6 @@ var OauthComponent = (function () {
         this.tokenRE = /#access_token=(\w*)&/;
     }
     OauthComponent.prototype.ngOnInit = function () {
-        console.log('matching token');
         var hasToken = window.location.href.match(this.tokenRE);
         localStorage.setItem('zen_token', hasToken[1]);
         this.router.navigateByUrl('/tickets');
@@ -25,7 +24,7 @@ var OauthComponent = (function () {
     OauthComponent = __decorate([
         core_1.Component({
             selector: 'oauth',
-            template: '<div></div>'
+            template: '<div></div>',
         }),
         __metadata("design:paramtypes", [router_1.Router])
     ], OauthComponent);

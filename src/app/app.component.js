@@ -9,13 +9,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var AppComponent = (function () {
     function AppComponent() {
-        this.title = 'Zendesk Customer History';
     }
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            styleUrls: ['./app.component.css'],
-            template: "\n  <h1>{{title}}</h1>\n  <router-outlet></router-outlet>\n  "
+            template: "\n  <router-outlet></router-outlet>\n  ",
         })
     ], AppComponent);
     return AppComponent;

@@ -18,7 +18,6 @@ var TicketsComponent = (function () {
         this.router = router;
     }
     TicketsComponent.prototype.ngOnInit = function () {
-        console.log('ticket component initializing, getting access token');
         this.authService.getAccess();
         this.getData();
     };

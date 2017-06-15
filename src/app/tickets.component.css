@@ -8,7 +8,6 @@
   border-radius: 4px;
 }
 :host /deep/ .card {
-  margin: 0 1em 0 1em;
   background-color: #CFD8DC;
 }
 :host /deep/ .tickets .card-header {
@@ -25,18 +24,18 @@
   color: white;
 }
 :host /deep/ .tickets .card-header.active:hover {
-  background-color: #BBD8DC;
+  background-color: #a6daec;
   color: white;
 }
 :host /deep/ .tickets .card-header a {
   display: block;
   padding: 10px 15px;
   margin: -10px -15px;
-  color: #607D8B;
+  color: #231f20;
   text-decoration: none;
 }
-:host /deep/ .collapsing {
-  transition: height 0.6s;
+:host /deep/ .tickets .card-block {
+  background-color: #ebeff0;
 }
 .tickets .badge {
   display: inline-block;

@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Http, Response, Headers, RequestOptions, URLSearchParams} from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise'
+import 'rxjs/add/operator/toPromise';
 
-import { Ticket } from './Ticket';
-import { User } from './User';
+import {Ticket} from './Ticket';
+import {User} from './User';
 
 @Injectable()
 export class AuthService {
@@ -25,7 +25,7 @@ export class AuthService {
   phone: string;
   tickets: Ticket[];
 
-  constructor (private http: Http) {}
+  constructor(private http: Http) {}
 
   getAccess(): void {
     if (!localStorage.getItem('zen_token')) {
@@ -47,7 +47,7 @@ export class AuthService {
 
   getTicketsByName(name: string): Promise<Ticket[]> {
     if (!localStorage.getItem('zen_token')) {
-      return Promise.reject("No access token available");
+      return Promise.reject('No access token available');
     }
     this.userName = name;
     let headers = new Headers();
@@ -55,11 +55,12 @@ export class AuthService {
 
     const search_string = `type:ticket requester:${this.userName}`;
 
-    return this.http.get(`${this.myQueryUrl}?query=${search_string}`, { headers: headers })
-                    .toPromise()
-                    .then(this.extractResults)
-                    .then(tickets => this.tickets = tickets)
-                    .catch(this.handleError);
+    return this.http
+      .get(`${this.myQueryUrl}?query=${search_string}`, {headers: headers})
+      .toPromise()
+      .then(this.extractResults)
+      .then(tickets => (this.tickets = tickets))
+      .catch(this.handleError);
   }
 
   getUserByPhone(phoneNumber: string): Promise<User> {
@@ -69,11 +70,12 @@ export class AuthService {
 
     const search_string = `type:user phone:${this.phone}`;
 
-    return this.http.get(`${this.myQueryUrl}?query=${search_string}`, { headers: headers })
-                    .toPromise()
-                    .then(this.extractResults)
-                    .then(user => this.user = user)
-                    .catch(this.handleError);
+    return this.http
+      .get(`${this.myQueryUrl}?query=${search_string}`, {headers: headers})
+      .toPromise()
+      .then(this.extractResults)
+      .then(user => (this.user = user))
+      .catch(this.handleError);
   }
 
   getTicketsByPhone(phoneNumber: string): Promise<Ticket[]> {
@@ -83,32 +85,37 @@ export class AuthService {
 
     const search_string = `type:user phone:${this.phone}`;
 
-    return this.http.get(`${this.myQueryUrl}?query=${search_string}`, { headers: headers })
-                    .toPromise()
-                    .then(response => this.userName = response.json().results.name)
-                    .then(() => this.getTicketsByName(this.userName))
-                    .catch(this.handleError);
+    return this.http
+      .get(`${this.myQueryUrl}?query=${search_string}`, {headers: headers})
+      .toPromise()
+      .then(response => (this.userName = response.json().results.name))
+      .then(() => this.getTicketsByName(this.userName))
+      .catch(this.handleError);
   }
 
   getUserById(id: number): Promise<User> {
     let tempUser: User = new User();
     tempUser.id = 1;
-    tempUser.name = "Donkey Kong";
+    tempUser.name = 'Donkey Kong';
     return Promise.resolve(tempUser);
   }
 
   getLocalTickets(): Promise<Ticket[]> {
-    return this.http.get(this.localData).toPromise().then(this.extractResults).then(tickets => this.tickets = tickets);
+    return this.http
+      .get(this.localData)
+      .toPromise()
+      .then(this.extractResults)
+      .then(tickets => (this.tickets = tickets));
   }
 
   private extractResults(res: Response) {
     let body = res.json();
-    console.log(body);
     return body.results || {};
   }
 
-  private handleError (error: | any): Promise<any> {  // TODO: IMPROVE THIS
-    console.error("An error has occurred", error);
+  private handleError(error: any): Promise<any> {
+    // TODO: IMPROVE THIS
+    console.error('An error has occurred', error);
     return Promise.reject(error.message || error);
   }
 }
