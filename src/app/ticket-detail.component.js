@@ -8,23 +8,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var ticket_1 = require("./ticket");
 var TicketDetailComponent = (function () {
     function TicketDetailComponent() {
     }
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", ticket_1.Ticket)
+    ], TicketDetailComponent.prototype, "ticket", void 0);
+    TicketDetailComponent = __decorate([
+        core_1.Component({
+            selector: 'ticket-detail',
+            templateUrl: './ticket-detail.component.html',
+            styleUrls: ['./ticket-detail.component.css']
+        })
+    ], TicketDetailComponent);
     return TicketDetailComponent;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", ticket_1.Ticket)
-], TicketDetailComponent.prototype, "ticket", void 0);
-TicketDetailComponent = __decorate([
-    core_1.Component({
-        selector: 'ticket-detail',
-        templateUrl: './ticket-detail.component.html',
-        styleUrls: ['./ticket-detail.component.css']
-    })
-], TicketDetailComponent);
 exports.TicketDetailComponent = TicketDetailComponent;
 //# sourceMappingURL=ticket-detail.component.js.map

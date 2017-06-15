@@ -8,23 +8,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var ticket_1 = require("./ticket");
 var TicketPreviewComponent = (function () {
     function TicketPreviewComponent() {
     }
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", ticket_1.Ticket)
+    ], TicketPreviewComponent.prototype, "selectedTicket", void 0);
+    TicketPreviewComponent = __decorate([
+        core_1.Component({
+            selector: 'ticket-preview',
+            templateUrl: './ticket-preview.component.html',
+            styleUrls: ['./ticket-preview.component.css']
+        })
+    ], TicketPreviewComponent);
     return TicketPreviewComponent;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", ticket_1.Ticket)
-], TicketPreviewComponent.prototype, "selectedTicket", void 0);
-TicketPreviewComponent = __decorate([
-    core_1.Component({
-        selector: 'ticket-preview',
-        templateUrl: './ticket-preview.component.html',
-        styleUrls: ['./ticket-preview.component.css']
-    })
-], TicketPreviewComponent);
 exports.TicketPreviewComponent = TicketPreviewComponent;
 //# sourceMappingURL=ticket-preview.component.js.map

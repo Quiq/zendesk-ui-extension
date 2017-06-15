@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var OauthComponent = (function () {
@@ -16,18 +17,19 @@ var OauthComponent = (function () {
         this.tokenRE = /#access_token=(\w*)&/;
     }
     OauthComponent.prototype.ngOnInit = function () {
+        console.log('matching token');
         var hasToken = window.location.href.match(this.tokenRE);
         localStorage.setItem('zen_token', hasToken[1]);
         this.router.navigateByUrl('/tickets');
     };
+    OauthComponent = __decorate([
+        core_1.Component({
+            selector: 'oauth',
+            template: '<div></div>'
+        }),
+        __metadata("design:paramtypes", [router_1.Router])
+    ], OauthComponent);
     return OauthComponent;
 }());
-OauthComponent = __decorate([
-    core_1.Component({
-        selector: 'oauth',
-        template: '<div></div>'
-    }),
-    __metadata("design:paramtypes", [router_1.Router])
-], OauthComponent);
 exports.OauthComponent = OauthComponent;
 //# sourceMappingURL=oauth.component.js.map

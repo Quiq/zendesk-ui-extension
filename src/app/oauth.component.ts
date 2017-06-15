@@ -12,6 +12,7 @@ export class OauthComponent implements OnInit {
   constructor(private router:Router){}
 
   ngOnInit(): void{
+    console.log('matching token');
     let hasToken = window.location.href.match(this.tokenRE);
     localStorage.setItem('zen_token', hasToken[1]);
     this.router.navigateByUrl('/tickets');
