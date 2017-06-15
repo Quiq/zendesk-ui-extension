@@ -7,4 +7,10 @@ import {AuthService} from './auth.service';
   <router-outlet></router-outlet>
   `,
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  ngOnInit() {
+    const convo = Quiq.getConversation();
+    console.log('Conversation gotten');
+    console.log(convo);
+  }
+}
