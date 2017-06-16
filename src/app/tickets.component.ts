@@ -8,6 +8,8 @@ import {Ticket} from './ticket';
 import {User} from './user';
 import {AuthService} from './auth.service';
 
+declare const Quiq: any;
+
 @Component({
   selector: 'my-tickets',
   templateUrl: './tickets.component.html',
@@ -23,25 +25,29 @@ export class TicketsComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getAccess();
+
+    const convo = Quiq.getConversation();
+    console.log(convo);
+
     this.getData();
   }
 
   getData(): void {
     const a = this.authService
-      .getTicketsByName('Donkey Kong')
+      .getTicketsByName('Joe Montana')
       .then(
         tickets =>
           (this.tickets = tickets.sort(
             (a, b) => +new Date(b.updated_at) - +new Date(a.updated_at),
           )),
       )
-      .then(this.appendIcons)
+      .then(this.setIconsAndTooltips)
       .then(() => this.authService.getUserById(this.tickets[1].id))
       .then(user => (this.user = user))
       .catch(err => console.error('An error has occurred', err));
   }
 
-  private appendIcons(tickets: Ticket[]) {
+  private setIconsAndTooltips(tickets: Ticket[]) {
     // TODO: parse this from ticket.subject or ticket.rawsubject
     for (let ticket of tickets) {
       switch (ticket.via.channel) {
@@ -53,6 +59,10 @@ export class TicketsComponent implements OnInit {
           break;
         default:
           ticket.icon = 'bath';
+      }
+      ticket.tooltip = ticket.priority ? `${ticket.priority} priority` : ticket.status;
+      if (ticket.status === 'closed' || ticket.status === 'solved') {
+        ticket.tooltip = ticket.status;
       }
     }
   }

@@ -34,16 +34,9 @@ export class AuthService {
       params.set('client_id', this.myClientId);
       params.set('scope', 'read');
       params.set('redirect_uri', this.redirectUri);
-      const windowHandle = window.location.replace(`${this.myAuthUrl}?${params.toString()}`);
+      const windowHandle = window.location.replace(`${this.centAuthUrl}?${params.toString()}`);
     }
   }
-
-  // getTicket(id: number): Promise<Ticket> {
-  //   if (this.tickets) {
-  //     return Promise.resolve(this.tickets.find(ticket => ticket.id === id));
-  //   }
-  //   return Promise.reject("No tickets currently available");
-  // }
 
   getTicketsByName(name: string): Promise<Ticket[]> {
     if (!localStorage.getItem('zen_token')) {
@@ -56,7 +49,7 @@ export class AuthService {
     const search_string = `type:ticket requester:${this.userName}`;
 
     return this.http
-      .get(`${this.myQueryUrl}?query=${search_string}`, {headers: headers})
+      .get(`${this.centQueryUrl}?query=${search_string}`, {headers: headers})
       .toPromise()
       .then(this.extractResults)
       .then(tickets => (this.tickets = tickets))
@@ -71,7 +64,7 @@ export class AuthService {
     const search_string = `type:user phone:${this.phone}`;
 
     return this.http
-      .get(`${this.myQueryUrl}?query=${search_string}`, {headers: headers})
+      .get(`${this.centQueryUrl}?query=${search_string}`, {headers: headers})
       .toPromise()
       .then(this.extractResults)
       .then(user => (this.user = user))
@@ -86,7 +79,7 @@ export class AuthService {
     const search_string = `type:user phone:${this.phone}`;
 
     return this.http
-      .get(`${this.myQueryUrl}?query=${search_string}`, {headers: headers})
+      .get(`${this.centQueryUrl}?query=${search_string}`, {headers: headers})
       .toPromise()
       .then(response => (this.userName = response.json().results.name))
       .then(() => this.getTicketsByName(this.userName))
@@ -94,6 +87,7 @@ export class AuthService {
   }
 
   getUserById(id: number): Promise<User> {
+    // TODO: Implement this
     let tempUser: User = new User();
     tempUser.id = 1;
     tempUser.name = 'Donkey Kong';

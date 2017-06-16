@@ -32,4 +32,5 @@ export class Ticket {
   created_at: string; //date
   updated_at: string; //date
   icon: string; // custom field for font awesome icons
+  tooltip: string; // custom field for tooltip text
 }

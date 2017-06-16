@@ -36,9 +36,11 @@
       <th>LAST UPDATED</th>
       <td>{{ticket.updated_at | date:'medium'}}</td>
     </tr>
-    <tr *ngFor="let field of ticket.custom_fields">
-      <th>{{field.id}}</th>
-      <td>{{field.value}}</td>
-    </tr>
+    <ng-container *ngFor="let field of ticket.custom_fields">
+      <tr *ngIf="field.value">
+        <th>{{field.id}}</th>
+        <td>{{field.value}}</td>
+      </tr>
+    </ng-container>
   </table>
 </div>

@@ -34,15 +34,9 @@ var AuthService = (function () {
             params.set('client_id', this.myClientId);
             params.set('scope', 'read');
             params.set('redirect_uri', this.redirectUri);
-            var windowHandle = window.location.replace(this.myAuthUrl + "?" + params.toString());
+            var windowHandle = window.location.replace(this.centAuthUrl + "?" + params.toString());
         }
     };
-    // getTicket(id: number): Promise<Ticket> {
-    //   if (this.tickets) {
-    //     return Promise.resolve(this.tickets.find(ticket => ticket.id === id));
-    //   }
-    //   return Promise.reject("No tickets currently available");
-    // }
     AuthService.prototype.getTicketsByName = function (name) {
         var _this = this;
         if (!localStorage.getItem('zen_token')) {
@@ -53,7 +47,7 @@ var AuthService = (function () {
         headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
         var search_string = "type:ticket requester:" + this.userName;
         return this.http
-            .get(this.myQueryUrl + "?query=" + search_string, { headers: headers })
+            .get(this.centQueryUrl + "?query=" + search_string, { headers: headers })
             .toPromise()
             .then(this.extractResults)
             .then(function (tickets) { return (_this.tickets = tickets); })
@@ -66,7 +60,7 @@ var AuthService = (function () {
         headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
         var search_string = "type:user phone:" + this.phone;
         return this.http
-            .get(this.myQueryUrl + "?query=" + search_string, { headers: headers })
+            .get(this.centQueryUrl + "?query=" + search_string, { headers: headers })
             .toPromise()
             .then(this.extractResults)
             .then(function (user) { return (_this.user = user); })
@@ -79,13 +73,14 @@ var AuthService = (function () {
         headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
         var search_string = "type:user phone:" + this.phone;
         return this.http
-            .get(this.myQueryUrl + "?query=" + search_string, { headers: headers })
+            .get(this.centQueryUrl + "?query=" + search_string, { headers: headers })
             .toPromise()
             .then(function (response) { return (_this.userName = response.json().results.name); })
             .then(function () { return _this.getTicketsByName(_this.userName); })
             .catch(this.handleError);
     };
     AuthService.prototype.getUserById = function (id) {
+        // TODO: Implement this
         var tempUser = new User_1.User();
         tempUser.id = 1;
         tempUser.name = 'Donkey Kong';

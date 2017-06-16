@@ -19,21 +19,23 @@ var TicketsComponent = (function () {
     }
     TicketsComponent.prototype.ngOnInit = function () {
         this.authService.getAccess();
+        var convo = Quiq.getConversation();
+        console.log(convo);
         this.getData();
     };
     TicketsComponent.prototype.getData = function () {
         var _this = this;
         var a = this.authService
-            .getTicketsByName('Donkey Kong')
+            .getTicketsByName('Joe Montana')
             .then(function (tickets) {
             return (_this.tickets = tickets.sort(function (a, b) { return +new Date(b.updated_at) - +new Date(a.updated_at); }));
         })
-            .then(this.appendIcons)
+            .then(this.setIconsAndTooltips)
             .then(function () { return _this.authService.getUserById(_this.tickets[1].id); })
             .then(function (user) { return (_this.user = user); })
             .catch(function (err) { return console.error('An error has occurred', err); });
     };
-    TicketsComponent.prototype.appendIcons = function (tickets) {
+    TicketsComponent.prototype.setIconsAndTooltips = function (tickets) {
         // TODO: parse this from ticket.subject or ticket.rawsubject
         for (var _i = 0, tickets_1 = tickets; _i < tickets_1.length; _i++) {
             var ticket = tickets_1[_i];
@@ -46,6 +48,10 @@ var TicketsComponent = (function () {
                     break;
                 default:
                     ticket.icon = 'bath';
+            }
+            ticket.tooltip = ticket.priority ? ticket.priority + " priority" : ticket.status;
+            if (ticket.status === 'closed' || ticket.status === 'solved') {
+                ticket.tooltip = ticket.status;
             }
         }
     };
