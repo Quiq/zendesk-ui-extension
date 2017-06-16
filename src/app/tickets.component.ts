@@ -48,18 +48,30 @@ export class TicketsComponent implements OnInit {
   }
 
   private setIconsAndTooltips(tickets: Ticket[]) {
-    // TODO: parse this from ticket.subject or ticket.rawsubject
+    const viaRegEx = /via (\w*)$/;
     for (let ticket of tickets) {
-      switch (ticket.via.channel) {
+      // try to parse icon from the subject first
+      let result = viaRegEx.exec(ticket.subject);
+      let icon = result ? result[1] : ticket.via.channel;
+      // set icon to font-awesome icon name
+      switch (icon) {
+        case 'Chat':
+          ticket.icon = 'comments-o';
+          break;
         case 'web':
           ticket.icon = 'envelope-o';
           break;
         case 'mobile':
+        case 'SMS':
           ticket.icon = 'mobile';
           break;
+        case 'Facebook':
+          ticket.icon = 'facebook-official';
+          break;
         default:
-          ticket.icon = 'bath';
+          ticket.icon = 'ticket';
       }
+      // set tooltip content based on status and priority
       ticket.tooltip = ticket.priority ? `${ticket.priority} priority` : ticket.status;
       if (ticket.status === 'closed' || ticket.status === 'solved') {
         ticket.tooltip = ticket.status;

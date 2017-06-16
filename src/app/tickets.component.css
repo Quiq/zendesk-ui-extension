@@ -1,5 +1,4 @@
 :host /deep/ .tickets {
-  cursor: pointer;
   position: relative;
   left: 0;
   background-color: #EEE;
@@ -39,13 +38,14 @@
 }
 .tickets .badge {
   display: inline-block;
-  font-size: small;
   color: white;
-  padding: 1em 1em 2em 1em;
+  padding: .3em 0;
   background-color: #4286f4;
   line-height: 1em;
   position: relative;
   left: -1px;
-  height: 1.8em;
+  width: 1.6em;
   border-radius: 4px;
+  font-weight: normal;
+  font-size: 1.2em;
 }

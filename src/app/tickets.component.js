@@ -36,19 +36,31 @@ var TicketsComponent = (function () {
             .catch(function (err) { return console.error('An error has occurred', err); });
     };
     TicketsComponent.prototype.setIconsAndTooltips = function (tickets) {
-        // TODO: parse this from ticket.subject or ticket.rawsubject
+        var viaRegEx = /via (\w*)$/;
         for (var _i = 0, tickets_1 = tickets; _i < tickets_1.length; _i++) {
             var ticket = tickets_1[_i];
-            switch (ticket.via.channel) {
+            // try to parse icon from the subject first
+            var result = viaRegEx.exec(ticket.subject);
+            var icon = result ? result[1] : ticket.via.channel;
+            // set icon to font-awesome icon name
+            switch (icon) {
+                case 'Chat':
+                    ticket.icon = 'comments-o';
+                    break;
                 case 'web':
                     ticket.icon = 'envelope-o';
                     break;
                 case 'mobile':
+                case 'SMS':
                     ticket.icon = 'mobile';
                     break;
+                case 'Facebook':
+                    ticket.icon = 'facebook-official';
+                    break;
                 default:
-                    ticket.icon = 'bath';
+                    ticket.icon = 'ticket';
             }
+            // set tooltip content based on status and priority
             ticket.tooltip = ticket.priority ? ticket.priority + " priority" : ticket.status;
             if (ticket.status === 'closed' || ticket.status === 'solved') {
                 ticket.tooltip = ticket.status;
