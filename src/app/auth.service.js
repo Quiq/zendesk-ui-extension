@@ -23,7 +23,7 @@ var AuthService = (function () {
         this.centAuthUrl = 'https://centricient.zendesk.com/oauth/authorizations/new';
         this.myQueryUrl = 'https://d3v-jetdog.zendesk.com/api/v2/search.json';
         this.centQueryUrl = 'https://centricient.zendesk.com/api/v2/search.json';
-        this.redirectUri = 'https://e2cea7a2.ngrok.io/oauth';
+        this.redirectUri = 'https://25d7c5ff.ngrok.io/oauth';
         this.myClientId = 'zendeskCustomerLookup';
         this.centClientID = 'zendesk_ui_extension';
     }

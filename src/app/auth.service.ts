@@ -16,7 +16,7 @@ export class AuthService {
   private centAuthUrl = 'https://centricient.zendesk.com/oauth/authorizations/new';
   private myQueryUrl = 'https://d3v-jetdog.zendesk.com/api/v2/search.json';
   private centQueryUrl = 'https://centricient.zendesk.com/api/v2/search.json';
-  private redirectUri = 'https://e2cea7a2.ngrok.io/oauth';
+  private redirectUri = 'https://25d7c5ff.ngrok.io/oauth';
   private myClientId = 'zendeskCustomerLookup';
   private centClientID = 'zendesk_ui_extension';
 
