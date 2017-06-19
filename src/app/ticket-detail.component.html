@@ -2,7 +2,7 @@
   <table>
     <tr>
       <th>ID</th>
-      <td><a href="#">{{ticket.id}}</a></td>
+      <td><a [href]="this.envService.ZEN_SITE+'/agent/tickets/'+ticket.id" target='_blank'>{{ticket.id}}</a></td>
     </tr>
     <tr>
       <th>TYPE</th>
