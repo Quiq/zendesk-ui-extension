@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 
 @Injectable()
-export class CustomLabelService {
-  labels = {
+export class EnvService {
+  LABELS = {
     '60316187': 'ZIP CODE',
     '60726048': 'CUSTOM TAG',
     '58411107': 'CONV ID',
@@ -13,4 +13,10 @@ export class CustomLabelService {
     '60725468': 'CUSTOM TEXTAREA',
     '60726508': 'CUSTOM NUMERIC',
   };
+
+  ZEN_SITE = 'https://centricient.zendesk.com';
+
+  CLIENT_ID = 'zendesk_ui_extension';
+
+  REDIRECT_URI = 'https://25d7c5ff.ngrok.io/oauth';
 }

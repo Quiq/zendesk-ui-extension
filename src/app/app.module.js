@@ -20,13 +20,13 @@ var ticket_preview_component_1 = require("./ticket-preview.component");
 var tickets_component_1 = require("./tickets.component");
 var oauth_component_1 = require("./oauth.component");
 var auth_service_1 = require("./auth.service");
-var custom_labels_service_1 = require("./custom-labels.service");
+var envs_service_1 = require("./envs.service");
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            providers: [auth_service_1.AuthService, custom_labels_service_1.CustomLabelService],
+            providers: [auth_service_1.AuthService, envs_service_1.EnvService],
             imports: [
                 app_routing_module_1.AppRoutingModule,
                 platform_browser_1.BrowserModule,

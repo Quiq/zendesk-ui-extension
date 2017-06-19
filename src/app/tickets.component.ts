@@ -18,6 +18,7 @@ declare const Quiq: any;
 export class TicketsComponent implements OnInit {
   selectedTicket: Ticket;
   tickets: Ticket[];
+  quiqConversation: object;
   user: User;
   errorMessage: string;
 
@@ -26,13 +27,13 @@ export class TicketsComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getAccess();
 
-    const convo = Quiq.getConversation();
-    console.log(convo);
+    this.quiqConversation = Quiq.getConversation();
+
 
     this.getData();
   }
 
-  getData(): void {
+  private getData(): void {
     const a = this.authService
       .getTicketsByName('Joe Montana')
       .then(
@@ -79,7 +80,7 @@ export class TicketsComponent implements OnInit {
     }
   }
 
-  onSelect(ticket: Ticket): void {
+  private onSelect(ticket: Ticket): void {
     this.selectedTicket = ticket;
   }
 }

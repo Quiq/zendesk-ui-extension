@@ -35,6 +35,7 @@
 }
 :host /deep/ .tickets .card-block {
   background-color: #ebeff0;
+  padding: 0;
 }
 .tickets .badge {
   display: inline-block;

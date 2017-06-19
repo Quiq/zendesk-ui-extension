@@ -6,35 +6,30 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
+import {EnvService} from './envs.service';
 import {Ticket} from './Ticket';
 import {User} from './User';
 
 @Injectable()
 export class AuthService {
   private localData = 'app/mock-ticket-data.json';
-  private myAuthUrl = 'https://d3v-jetdog.zendesk.com/oauth/authorizations/new';
-  private centAuthUrl = 'https://centricient.zendesk.com/oauth/authorizations/new';
-  private myQueryUrl = 'https://d3v-jetdog.zendesk.com/api/v2/search.json';
-  private centQueryUrl = 'https://centricient.zendesk.com/api/v2/search.json';
-  private redirectUri = 'https://25d7c5ff.ngrok.io/oauth';
-  private myClientId = 'zendeskCustomerLookup';
-  private centClientID = 'zendesk_ui_extension';
-
   user: User;
   userName: string;
   phone: string;
   tickets: Ticket[];
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, private envService: EnvService) {}
 
   getAccess(): void {
     if (!localStorage.getItem('zen_token')) {
       let params = new URLSearchParams();
       params.set('response_type', 'token');
-      params.set('client_id', this.myClientId);
+      params.set('client_id', this.envService.CLIENT_ID);
       params.set('scope', 'read');
-      params.set('redirect_uri', this.redirectUri);
-      const windowHandle = window.location.replace(`${this.centAuthUrl}?${params.toString()}`);
+      params.set('redirect_uri', this.envService.REDIRECT_URI);
+      window.location.replace(
+        `${this.envService.ZEN_SITE}/oauth/authorizations/new?${params.toString()}`,
+      );
     }
   }
 
@@ -49,7 +44,9 @@ export class AuthService {
     const search_string = `type:ticket requester:${this.userName}`;
 
     return this.http
-      .get(`${this.centQueryUrl}?query=${search_string}`, {headers: headers})
+      .get(`${this.envService.ZEN_SITE}/api/v2/search.json?query=${search_string}`, {
+        headers: headers,
+      })
       .toPromise()
       .then(this.extractResults)
       .then(tickets => (this.tickets = tickets))
@@ -64,7 +61,9 @@ export class AuthService {
     const search_string = `type:user phone:${this.phone}`;
 
     return this.http
-      .get(`${this.centQueryUrl}?query=${search_string}`, {headers: headers})
+      .get(`${this.envService.ZEN_SITE}/api/v2/search.json?query=${search_string}`, {
+        headers: headers,
+      })
       .toPromise()
       .then(this.extractResults)
       .then(user => (this.user = user))
@@ -79,7 +78,9 @@ export class AuthService {
     const search_string = `type:user phone:${this.phone}`;
 
     return this.http
-      .get(`${this.centQueryUrl}?query=${search_string}`, {headers: headers})
+      .get(`${this.envService.ZEN_SITE}/api/v2/search.json?query=${search_string}`, {
+        headers: headers,
+      })
       .toPromise()
       .then(response => (this.userName = response.json().results.name))
       .then(() => this.getTicketsByName(this.userName))

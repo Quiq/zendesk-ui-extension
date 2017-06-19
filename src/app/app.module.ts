@@ -14,10 +14,10 @@ import {TicketPreviewComponent} from './ticket-preview.component';
 import {TicketsComponent} from './tickets.component';
 import {OauthComponent} from './oauth.component';
 import {AuthService} from './auth.service';
-import {CustomLabelService} from './custom-labels.service';
+import {EnvService} from './envs.service';
 
 @NgModule({
-  providers: [AuthService, CustomLabelService],
+  providers: [AuthService, EnvService],
   imports: [
     AppRoutingModule,
     BrowserModule,

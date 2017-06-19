@@ -7,9 +7,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var CustomLabelService = (function () {
-    function CustomLabelService() {
-        this.labels = {
+var EnvService = (function () {
+    function EnvService() {
+        this.LABELS = {
             '60316187': 'ZIP CODE',
             '60726048': 'CUSTOM TAG',
             '58411107': 'CONV ID',
@@ -20,11 +20,14 @@ var CustomLabelService = (function () {
             '60725468': 'CUSTOM TEXTAREA',
             '60726508': 'CUSTOM NUMERIC',
         };
+        this.ZEN_SITE = 'https://centricient.zendesk.com';
+        this.CLIENT_ID = 'zendesk_ui_extension';
+        this.REDIRECT_URI = 'https://25d7c5ff.ngrok.io/oauth';
     }
-    CustomLabelService = __decorate([
+    EnvService = __decorate([
         core_1.Injectable()
-    ], CustomLabelService);
-    return CustomLabelService;
+    ], EnvService);
+    return EnvService;
 }());
-exports.CustomLabelService = CustomLabelService;
-//# sourceMappingURL=custom-labels.service.js.map
+exports.EnvService = EnvService;
+//# sourceMappingURL=envs.service.js.map

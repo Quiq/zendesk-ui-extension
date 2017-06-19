@@ -14,27 +14,22 @@ var http_1 = require("@angular/http");
 require("rxjs/add/operator/catch");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/toPromise");
+var envs_service_1 = require("./envs.service");
 var User_1 = require("./User");
 var AuthService = (function () {
-    function AuthService(http) {
+    function AuthService(http, envService) {
         this.http = http;
+        this.envService = envService;
         this.localData = 'app/mock-ticket-data.json';
-        this.myAuthUrl = 'https://d3v-jetdog.zendesk.com/oauth/authorizations/new';
-        this.centAuthUrl = 'https://centricient.zendesk.com/oauth/authorizations/new';
-        this.myQueryUrl = 'https://d3v-jetdog.zendesk.com/api/v2/search.json';
-        this.centQueryUrl = 'https://centricient.zendesk.com/api/v2/search.json';
-        this.redirectUri = 'https://25d7c5ff.ngrok.io/oauth';
-        this.myClientId = 'zendeskCustomerLookup';
-        this.centClientID = 'zendesk_ui_extension';
     }
     AuthService.prototype.getAccess = function () {
         if (!localStorage.getItem('zen_token')) {
             var params = new http_1.URLSearchParams();
             params.set('response_type', 'token');
-            params.set('client_id', this.myClientId);
+            params.set('client_id', this.envService.CLIENT_ID);
             params.set('scope', 'read');
-            params.set('redirect_uri', this.redirectUri);
-            var windowHandle = window.location.replace(this.centAuthUrl + "?" + params.toString());
+            params.set('redirect_uri', this.envService.REDIRECT_URI);
+            window.location.replace(this.envService.ZEN_SITE + "/oauth/authorizations/new?" + params.toString());
         }
     };
     AuthService.prototype.getTicketsByName = function (name) {
@@ -47,7 +42,9 @@ var AuthService = (function () {
         headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
         var search_string = "type:ticket requester:" + this.userName;
         return this.http
-            .get(this.centQueryUrl + "?query=" + search_string, { headers: headers })
+            .get(this.envService.ZEN_SITE + "/api/v2/search.json?query=" + search_string, {
+            headers: headers,
+        })
             .toPromise()
             .then(this.extractResults)
             .then(function (tickets) { return (_this.tickets = tickets); })
@@ -60,7 +57,9 @@ var AuthService = (function () {
         headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
         var search_string = "type:user phone:" + this.phone;
         return this.http
-            .get(this.centQueryUrl + "?query=" + search_string, { headers: headers })
+            .get(this.envService.ZEN_SITE + "/api/v2/search.json?query=" + search_string, {
+            headers: headers,
+        })
             .toPromise()
             .then(this.extractResults)
             .then(function (user) { return (_this.user = user); })
@@ -73,7 +72,9 @@ var AuthService = (function () {
         headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
         var search_string = "type:user phone:" + this.phone;
         return this.http
-            .get(this.centQueryUrl + "?query=" + search_string, { headers: headers })
+            .get(this.envService.ZEN_SITE + "/api/v2/search.json?query=" + search_string, {
+            headers: headers,
+        })
             .toPromise()
             .then(function (response) { return (_this.userName = response.json().results.name); })
             .then(function () { return _this.getTicketsByName(_this.userName); })
@@ -105,7 +106,7 @@ var AuthService = (function () {
     };
     AuthService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.Http])
+        __metadata("design:paramtypes", [http_1.Http, envs_service_1.EnvService])
     ], AuthService);
     return AuthService;
 }());

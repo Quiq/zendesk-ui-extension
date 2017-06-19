@@ -11,10 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var ticket_1 = require("./ticket");
-var custom_labels_service_1 = require("./custom-labels.service");
+var envs_service_1 = require("./envs.service");
 var TicketDetailComponent = (function () {
-    function TicketDetailComponent(customLabelService) {
-        this.customLabelService = customLabelService;
+    function TicketDetailComponent(envService) {
+        this.envService = envService;
     }
     __decorate([
         core_1.Input(),
@@ -26,7 +26,7 @@ var TicketDetailComponent = (function () {
             templateUrl: './ticket-detail.component.html',
             styleUrls: ['./ticket-detail.component.css'],
         }),
-        __metadata("design:paramtypes", [custom_labels_service_1.CustomLabelService])
+        __metadata("design:paramtypes", [envs_service_1.EnvService])
     ], TicketDetailComponent);
     return TicketDetailComponent;
 }());

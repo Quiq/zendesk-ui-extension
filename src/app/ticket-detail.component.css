@@ -2,8 +2,14 @@ table, tr, th, td {
   text-align: left;
   border: 1px solid #231f20;
   border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  word-wrap: break-word;
 }
 th, td {
   color: #231f20;
   padding: .2em;
+}
+th {
+  width: 40%;
 }

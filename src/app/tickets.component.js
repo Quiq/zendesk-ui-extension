@@ -19,8 +19,7 @@ var TicketsComponent = (function () {
     }
     TicketsComponent.prototype.ngOnInit = function () {
         this.authService.getAccess();
-        var convo = Quiq.getConversation();
-        console.log(convo);
+        this.quiqConversation = Quiq.getConversation();
         this.getData();
     };
     TicketsComponent.prototype.getData = function () {

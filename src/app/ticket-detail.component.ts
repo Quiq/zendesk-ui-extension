@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 
 import {Ticket} from './ticket';
-import {CustomLabelService} from './custom-labels.service';
+import {EnvService} from './envs.service';
 
 @Component({
   selector: 'ticket-detail',
@@ -11,5 +11,5 @@ import {CustomLabelService} from './custom-labels.service';
 export class TicketDetailComponent {
   @Input() ticket: Ticket;
 
-  constructor(private customLabelService: CustomLabelService) {}
+  constructor(private envService: EnvService) {}
 }
