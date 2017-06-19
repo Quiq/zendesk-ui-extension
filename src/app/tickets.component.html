@@ -1,18 +1,21 @@
-<h2 *ngIf="user">{{user.name}}'s Tickets</h2>
-<ngb-accordion class='tickets'>
-  <ngb-panel *ngFor="let ticket of tickets"
-    [class.selected]="ticket === selectedTicket"
-    (click)="onSelect(ticket)">
-    <ng-template ngbPanelTitle>
-      <span
-        class="badge {{ticket.priority}} {{ticket.status}} fa fa-{{ticket.icon}} fa-2x"
-        md-tooltip="{{ticket.tooltip}}"
-        mdTooltipPosition="right">
-      </span>
-      {{ticket.updated_at|date:'shortDate'}} {{ticket.subject}}
-    </ng-template>
-    <ng-template ngbPanelContent>
-      <ticket-detail [ticket]="ticket"></ticket-detail>
-    </ng-template>
-  </ngb-panel>
-</ngb-accordion>
+<h2 *ngIf="errorMessage;else ticket_history">{{errorMessage}}</h2>
+<ng-template #ticket_history>
+  <h2>{{userName}}'s Tickets</h2>
+  <ngb-accordion class='tickets'>
+    <ngb-panel *ngFor="let ticket of tickets"
+      [class.selected]="ticket === selectedTicket"
+      (click)="onSelect(ticket)">
+      <ng-template ngbPanelTitle>
+        <span
+          class="badge {{ticket.priority}} {{ticket.status}} fa fa-{{ticket.icon}} fa-2x"
+          md-tooltip="{{ticket.tooltip}}"
+          mdTooltipPosition="right">
+        </span>
+        {{ticket.updated_at|date:'shortDate'}}
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <ticket-detail [ticket]="ticket"></ticket-detail>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+</ng-template>

@@ -19,23 +19,31 @@ export class TicketsComponent implements OnInit {
   selectedTicket: Ticket;
   tickets: Ticket[];
   quiqConversation: object;
-  user: User;
+  userName: string;
   errorMessage: string;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
+    // Oauth - impllicit grant flow
     this.authService.getAccess();
-
+    // Use Quiq SDK to get conversation object
     this.quiqConversation = Quiq.getConversation();
-
-
-    this.getData();
+    // Use contact name to search tickets via Zendesk API
+    if (this.quiqConversation.contact.firstName || this.quiqConversation.contact.lastName) {
+      this.userName = [
+        this.quiqConversation.contact.firstName,
+        this.quiqConversation.contact.lastName,
+      ].join(' ');
+      this.getData(this.userName);
+    } else {
+      this.errorMessage = 'No user history information available';
+    }
   }
 
-  private getData(): void {
+  private getData(name: string): void {
     const a = this.authService
-      .getTicketsByName('Joe Montana')
+      .getTicketsByName(name)
       .then(
         tickets =>
           (this.tickets = tickets.sort(
@@ -43,8 +51,6 @@ export class TicketsComponent implements OnInit {
           )),
       )
       .then(this.setIconsAndTooltips)
-      .then(() => this.authService.getUserById(this.tickets[1].id))
-      .then(user => (this.user = user))
       .catch(err => console.error('An error has occurred', err));
   }
 

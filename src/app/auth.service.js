@@ -15,7 +15,6 @@ require("rxjs/add/operator/catch");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/toPromise");
 var envs_service_1 = require("./envs.service");
-var User_1 = require("./User");
 var AuthService = (function () {
     function AuthService(http, envService) {
         this.http = http;
@@ -33,67 +32,25 @@ var AuthService = (function () {
         }
     };
     AuthService.prototype.getTicketsByName = function (name) {
-        var _this = this;
         if (!localStorage.getItem('zen_token')) {
             return Promise.reject('No access token available');
         }
-        this.userName = name;
         var headers = new http_1.Headers();
         headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
-        var search_string = "type:ticket requester:" + this.userName;
+        var search_string = "type:ticket requester:" + name;
         return this.http
             .get(this.envService.ZEN_SITE + "/api/v2/search.json?query=" + search_string, {
             headers: headers,
         })
             .toPromise()
             .then(this.extractResults)
-            .then(function (tickets) { return (_this.tickets = tickets); })
             .catch(this.handleError);
-    };
-    AuthService.prototype.getUserByPhone = function (phoneNumber) {
-        var _this = this;
-        this.phone = phoneNumber;
-        var headers = new http_1.Headers();
-        headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
-        var search_string = "type:user phone:" + this.phone;
-        return this.http
-            .get(this.envService.ZEN_SITE + "/api/v2/search.json?query=" + search_string, {
-            headers: headers,
-        })
-            .toPromise()
-            .then(this.extractResults)
-            .then(function (user) { return (_this.user = user); })
-            .catch(this.handleError);
-    };
-    AuthService.prototype.getTicketsByPhone = function (phoneNumber) {
-        var _this = this;
-        this.phone = phoneNumber;
-        var headers = new http_1.Headers();
-        headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
-        var search_string = "type:user phone:" + this.phone;
-        return this.http
-            .get(this.envService.ZEN_SITE + "/api/v2/search.json?query=" + search_string, {
-            headers: headers,
-        })
-            .toPromise()
-            .then(function (response) { return (_this.userName = response.json().results.name); })
-            .then(function () { return _this.getTicketsByName(_this.userName); })
-            .catch(this.handleError);
-    };
-    AuthService.prototype.getUserById = function (id) {
-        // TODO: Implement this
-        var tempUser = new User_1.User();
-        tempUser.id = 1;
-        tempUser.name = 'Donkey Kong';
-        return Promise.resolve(tempUser);
     };
     AuthService.prototype.getLocalTickets = function () {
-        var _this = this;
         return this.http
             .get(this.localData)
             .toPromise()
-            .then(this.extractResults)
-            .then(function (tickets) { return (_this.tickets = tickets); });
+            .then(this.extractResults);
     };
     AuthService.prototype.extractResults = function (res) {
         var body = res.json();

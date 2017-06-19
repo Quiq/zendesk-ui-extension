@@ -18,20 +18,30 @@ var TicketsComponent = (function () {
         this.router = router;
     }
     TicketsComponent.prototype.ngOnInit = function () {
+        // Oauth - impllicit grant flow
         this.authService.getAccess();
+        // Use Quiq SDK to get conversation object
         this.quiqConversation = Quiq.getConversation();
-        this.getData();
+        // Use contact name to search tickets via Zendesk API
+        if (this.quiqConversation.contact.firstName || this.quiqConversation.contact.lastName) {
+            this.userName = [
+                this.quiqConversation.contact.firstName,
+                this.quiqConversation.contact.lastName,
+            ].join(' ');
+            this.getData(this.userName);
+        }
+        else {
+            this.errorMessage = 'No user history information available';
+        }
     };
-    TicketsComponent.prototype.getData = function () {
+    TicketsComponent.prototype.getData = function (name) {
         var _this = this;
         var a = this.authService
-            .getTicketsByName('Joe Montana')
+            .getTicketsByName(name)
             .then(function (tickets) {
             return (_this.tickets = tickets.sort(function (a, b) { return +new Date(b.updated_at) - +new Date(a.updated_at); }));
         })
             .then(this.setIconsAndTooltips)
-            .then(function () { return _this.authService.getUserById(_this.tickets[1].id); })
-            .then(function (user) { return (_this.user = user); })
             .catch(function (err) { return console.error('An error has occurred', err); });
     };
     TicketsComponent.prototype.setIconsAndTooltips = function (tickets) {
