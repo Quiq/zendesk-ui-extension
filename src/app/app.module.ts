@@ -1,23 +1,24 @@
-import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpModule, JsonpModule } from '@angular/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdTooltipModule } from '@angular/material';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
+import {HttpModule, JsonpModule} from '@angular/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MdTooltipModule} from '@angular/material';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-import { AppRoutingModule } from './app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
 
-import { AppComponent }  from './app.component';
-import { TicketDetailComponent } from './ticket-detail.component';
-import { TicketPreviewComponent } from './ticket-preview.component';
-import { TicketsComponent } from './tickets.component';
-import { AuthService } from './auth.service';
-import { OauthComponent } from './oauth.component';
+import {AppComponent} from './app.component';
+import {TicketDetailComponent} from './ticket-detail.component';
+import {TicketPreviewComponent} from './ticket-preview.component';
+import {TicketsComponent} from './tickets.component';
+import {OauthComponent} from './oauth.component';
+import {AuthService} from './auth.service';
+import {CustomLabelService} from './custom-labels.service';
 
 @NgModule({
-  providers: [AuthService],
-  imports:      [
+  providers: [AuthService, CustomLabelService],
+  imports: [
     AppRoutingModule,
     BrowserModule,
     FormsModule,
@@ -32,8 +33,8 @@ import { OauthComponent } from './oauth.component';
     TicketsComponent,
     TicketDetailComponent,
     TicketPreviewComponent,
-    OauthComponent
+    OauthComponent,
   ],
-  bootstrap:    [ AppComponent ]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

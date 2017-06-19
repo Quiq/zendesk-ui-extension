@@ -38,7 +38,7 @@
     </tr>
     <ng-container *ngFor="let field of ticket.custom_fields">
       <tr *ngIf="field.value">
-        <th>{{field.id}}</th>
+        <th>{{this.customLabelService.labels[field.id]}}</th>
         <td>{{field.value}}</td>
       </tr>
     </ng-container>
