@@ -21,7 +21,7 @@ var EnvService = (function () {
             '60726508': 'CUSTOM NUMERIC',
         };
         this.ZEN_SITE = 'https://centricient.zendesk.com';
-        this.CLIENT_ID = 'zendesk_ui_extension';
+        this.CLIENT_ID = 'zendeskCustomerLookup';
         this.REDIRECT_URI = 'https://25d7c5ff.ngrok.io/oauth';
     }
     EnvService = __decorate([

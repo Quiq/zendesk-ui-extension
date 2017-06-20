@@ -16,7 +16,7 @@ export class EnvService {
 
   ZEN_SITE = 'https://centricient.zendesk.com';
 
-  CLIENT_ID = 'zendesk_ui_extension';
+  CLIENT_ID = 'zendeskCustomerLookup';
 
   REDIRECT_URI = 'https://25d7c5ff.ngrok.io/oauth';
 }

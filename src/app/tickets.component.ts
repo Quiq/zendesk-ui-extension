@@ -8,7 +8,7 @@ import {Ticket} from './ticket';
 import {User} from './user';
 import {AuthService} from './auth.service';
 
-declare const Quiq: any;
+declare var Quiq: any;
 
 @Component({
   selector: 'my-tickets',
@@ -18,7 +18,7 @@ declare const Quiq: any;
 export class TicketsComponent implements OnInit {
   selectedTicket: Ticket;
   tickets: Ticket[];
-  quiqConversation: object;
+  quiqConversation: any;
   userName: string;
   errorMessage: string;
 
