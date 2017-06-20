@@ -12,26 +12,36 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var auth_service_1 = require("./auth.service");
+var envs_service_1 = require("./envs.service");
 var TicketsComponent = (function () {
-    function TicketsComponent(authService, router) {
+    function TicketsComponent(authService, router, envService) {
         this.authService = authService;
         this.router = router;
+        this.envService = envService;
     }
     TicketsComponent.prototype.ngOnInit = function () {
         // Oauth - impllicit grant flow
         this.authService.getAccess();
         // Use Quiq SDK to get conversation object
-        this.quiqConversation = Quiq.getConversation();
-        // Use contact name to search tickets via Zendesk API
-        if (this.quiqConversation.contact.firstName || this.quiqConversation.contact.lastName) {
-            this.userName = [
-                this.quiqConversation.contact.firstName,
-                this.quiqConversation.contact.lastName,
-            ].join(' ');
-            this.getData(this.userName);
+        if (window.self !== window.top) {
+            this.quiqConversation = Quiq.getConversation();
+            //console.log(this.quiqConversation);
+            // Use contact name to search tickets via Zendesk API
+            if (this.quiqConversation.contact.firstName || this.quiqConversation.contact.lastName) {
+                this.userName = [
+                    this.quiqConversation.contact.firstName,
+                    this.quiqConversation.contact.lastName,
+                ].join(' ');
+                this.getData(this.userName);
+            }
+            else {
+                this.errorMessage = 'No user history information available';
+            }
         }
         else {
-            this.errorMessage = 'No user history information available';
+            // No Quiq object if running locally
+            this.userName = this.envService.END_USER;
+            this.getData(this.userName);
         }
     };
     TicketsComponent.prototype.getData = function (name) {
@@ -85,7 +95,9 @@ var TicketsComponent = (function () {
             templateUrl: './tickets.component.html',
             styleUrls: ['./priority-colors.css', './tickets.component.css'],
         }),
-        __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router])
+        __metadata("design:paramtypes", [auth_service_1.AuthService,
+            router_1.Router,
+            envs_service_1.EnvService])
     ], TicketsComponent);
     return TicketsComponent;
 }());

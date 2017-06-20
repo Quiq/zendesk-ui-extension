@@ -18,5 +18,8 @@ export class EnvService {
 
   CLIENT_ID = 'zendeskCustomerLookup';
 
-  REDIRECT_URI = 'https://25d7c5ff.ngrok.io/oauth';
+  //REDIRECT_URI = 'https://25d7c5ff.ngrok.io/oauth';
+  REDIRECT_URI = 'http://localhost:3000/oauth';
+
+  END_USER = 'Joe Montana';
 }

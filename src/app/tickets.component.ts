@@ -7,6 +7,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {Ticket} from './ticket';
 import {User} from './user';
 import {AuthService} from './auth.service';
+import {EnvService} from './envs.service';
 
 declare var Quiq: any;
 
@@ -22,22 +23,33 @@ export class TicketsComponent implements OnInit {
   userName: string;
   errorMessage: string;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private envService: EnvService,
+  ) {}
 
   ngOnInit(): void {
     // Oauth - impllicit grant flow
     this.authService.getAccess();
     // Use Quiq SDK to get conversation object
-    this.quiqConversation = Quiq.getConversation();
-    // Use contact name to search tickets via Zendesk API
-    if (this.quiqConversation.contact.firstName || this.quiqConversation.contact.lastName) {
-      this.userName = [
-        this.quiqConversation.contact.firstName,
-        this.quiqConversation.contact.lastName,
-      ].join(' ');
-      this.getData(this.userName);
+    if (window.self !== window.top) {
+      this.quiqConversation = Quiq.getConversation();
+      //console.log(this.quiqConversation);
+      // Use contact name to search tickets via Zendesk API
+      if (this.quiqConversation.contact.firstName || this.quiqConversation.contact.lastName) {
+        this.userName = [
+          this.quiqConversation.contact.firstName,
+          this.quiqConversation.contact.lastName,
+        ].join(' ');
+        this.getData(this.userName);
+      } else {
+        this.errorMessage = 'No user history information available';
+      }
     } else {
-      this.errorMessage = 'No user history information available';
+      // No Quiq object if running locally
+      this.userName = this.envService.END_USER;
+      this.getData(this.userName);
     }
   }
 
