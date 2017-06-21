@@ -67,6 +67,9 @@ export class TicketsComponent implements OnInit {
   }
 
   private setIconsAndTooltips(tickets: Ticket[]) {
+    if (tickets.length < 1) {
+      this.errorMessage = `No previous tickets found for ${this.userName}`;
+    }
     const viaRegEx = /via (\w*)$/;
     for (let ticket of tickets) {
       // try to parse icon from the subject first

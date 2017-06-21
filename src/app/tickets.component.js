@@ -55,6 +55,9 @@ var TicketsComponent = (function () {
             .catch(function (err) { return console.error('An error has occurred', err); });
     };
     TicketsComponent.prototype.setIconsAndTooltips = function (tickets) {
+        if (tickets.length < 1) {
+            this.errorMessage = "No previous tickets found for " + this.userName;
+        }
         var viaRegEx = /via (\w*)$/;
         for (var _i = 0, tickets_1 = tickets; _i < tickets_1.length; _i++) {
             var ticket = tickets_1[_i];
