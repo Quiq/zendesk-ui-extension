@@ -22,8 +22,8 @@ var EnvService = (function () {
         };
         this.ZEN_SITE = 'https://centricient.zendesk.com';
         this.CLIENT_ID = 'zendeskCustomerLookup';
-        //REDIRECT_URI = 'https://25d7c5ff.ngrok.io/oauth';
-        this.REDIRECT_URI = 'http://localhost:3000/oauth';
+        this.REDIRECT_URI = 'https://25d7c5ff.ngrok.io/oauth';
+        //REDIRECT_URI = 'http://localhost:3000/oauth';
         this.END_USER = 'Joe Montana';
     }
     EnvService = __decorate([
