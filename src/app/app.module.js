@@ -16,7 +16,6 @@ var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var app_routing_module_1 = require("./app-routing.module");
 var app_component_1 = require("./app.component");
 var ticket_detail_component_1 = require("./ticket-detail.component");
-var ticket_preview_component_1 = require("./ticket-preview.component");
 var tickets_component_1 = require("./tickets.component");
 var oauth_component_1 = require("./oauth.component");
 var auth_service_1 = require("./auth.service");
@@ -41,7 +40,6 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 tickets_component_1.TicketsComponent,
                 ticket_detail_component_1.TicketDetailComponent,
-                ticket_preview_component_1.TicketPreviewComponent,
                 oauth_component_1.OauthComponent,
             ],
             bootstrap: [app_component_1.AppComponent],

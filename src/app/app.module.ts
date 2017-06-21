@@ -10,7 +10,6 @@ import {AppRoutingModule} from './app-routing.module';
 
 import {AppComponent} from './app.component';
 import {TicketDetailComponent} from './ticket-detail.component';
-import {TicketPreviewComponent} from './ticket-preview.component';
 import {TicketsComponent} from './tickets.component';
 import {OauthComponent} from './oauth.component';
 import {AuthService} from './auth.service';
@@ -32,7 +31,6 @@ import {EnvService} from './envs.service';
     AppComponent,
     TicketsComponent,
     TicketDetailComponent,
-    TicketPreviewComponent,
     OauthComponent,
   ],
   bootstrap: [AppComponent],
