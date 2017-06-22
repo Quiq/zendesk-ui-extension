@@ -20,7 +20,7 @@ var TicketsComponent = (function () {
         this.envService = envService;
     }
     TicketsComponent.prototype.ngOnInit = function () {
-        // Oauth - impllicit grant flow
+        // Oauth - implicit grant flow
         this.authService.getAccess();
         // Use Quiq SDK to get conversation object
         if (window.self !== window.top) {

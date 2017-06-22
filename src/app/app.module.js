@@ -31,17 +31,11 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
                 http_1.HttpModule,
-                http_1.JsonpModule,
                 animations_1.BrowserAnimationsModule,
                 material_1.MdTooltipModule,
                 ng_bootstrap_1.NgbModule.forRoot(),
             ],
-            declarations: [
-                app_component_1.AppComponent,
-                tickets_component_1.TicketsComponent,
-                ticket_detail_component_1.TicketDetailComponent,
-                oauth_component_1.OauthComponent,
-            ],
+            declarations: [app_component_1.AppComponent, tickets_component_1.TicketsComponent, ticket_detail_component_1.TicketDetailComponent, oauth_component_1.OauthComponent],
             bootstrap: [app_component_1.AppComponent],
         })
     ], AppModule);

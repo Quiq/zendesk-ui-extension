@@ -7,7 +7,7 @@ This extension is designed to integrate with a Zendesk CRM account to display th
 
 ## Usage
 
-The app makes use of Zendesk's implicit grant OAuth flow to access an organization's Zendesk Support account.  It uses the **Contact object**, a member of the **Quiq object** exported by the Quiq Extension SDK, along with the [Zendesk Search API](https://developer.zendesk.com/rest_api/docs/core/search) to pull up any previous tickets requested by a Zendesk End User.  
+The app makes use of Zendesk's implicit grant OAuth flow to access an organization's Zendesk Support account.  It uses the the Quiq Extension SDK to access the **Contact object**, a member of the **Quiq object** that is exported by the, along with the [Zendesk Search API](https://developer.zendesk.com/rest_api/docs/core/search) to pull up any previous tickets requested by a Zendesk End User.  The SDK is loaded in `./index.html`.
 
 ### Running Locally
 
