@@ -30,7 +30,7 @@ export class TicketsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Oauth - impllicit grant flow
+    // Oauth - implicit grant flow
     this.authService.getAccess();
     // Use Quiq SDK to get conversation object
     if (window.self !== window.top) {
