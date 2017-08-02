@@ -42,33 +42,53 @@ export class TicketsComponent implements OnInit {
           this.quiqConversation.contact.firstName,
           this.quiqConversation.contact.lastName,
         ].join(' ');
-        this.getData(this.userName);
+        this.getDataByName(this.userName);
+      } else if (this.quiqConversation.contact.phoneNumber) {
+        this.getDataByPhone(this.quiqConversation.contact.phoneNumber)
       } else {
         this.errorMessage = 'No user history information available';
       }
     } else {
       // No Quiq object if running locally
       this.userName = this.envService.END_USER;
-      this.getData(this.userName);
+      this.getDataByName(this.userName);
     }
   }
 
-  private getData(name: string): void {
-    const a = this.authService
-      .getTicketsByName(name)
-      .then(
-        tickets =>
-          (this.tickets = tickets.sort(
-            (a, b) => +new Date(b.updated_at) - +new Date(a.updated_at),
-          )),
-      )
-      .then(this.setIconsAndTooltips)
-      .catch(err => console.error('An error has occurred', err));
+  private getDataByName(name: string): void {
+    if (name) {
+      const a = this.authService
+        .getTicketsByName(name)
+        .then(
+          tickets =>
+            (this.tickets = tickets.sort(
+              (a, b) => +new Date(b.updated_at) - +new Date(a.updated_at),
+            )),
+        )
+        .then(this.setIconsAndTooltips)
+        .catch(err => console.error('An error has occurred', err));
+      }
   }
 
-  private setIconsAndTooltips(tickets: Ticket[]) {
+  private getDataByPhone(phone: string): void {
+    if (phone) {
+      const a = this.authService
+        .getTicketsByPhone(phone)
+        .then(
+          tickets =>
+            (this.tickets = tickets.sort(
+              (a, b) => +new Date(b.updated_at) - +new Date(a.updated_at),
+            )),
+        )
+        .then(this.setIconsAndTooltips)
+        .catch(err => console.error('An error has occurred', err));
+    }
+  }
+
+  private setIconsAndTooltips = (tickets: Ticket[]) => {
     if (tickets.length < 1) {
-      this.errorMessage = `No previous tickets found for ${this.userName}`;
+      this.errorMessage = `No previous tickets found`;
+      return;
     }
     const viaRegEx = /via (\w*)$/;
     for (let ticket of tickets) {

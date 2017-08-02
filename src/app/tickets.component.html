@@ -1,6 +1,5 @@
 <h2 *ngIf="errorMessage;else ticket_history">{{errorMessage}}</h2>
 <ng-template #ticket_history>
-  <h2>{{userName}}'s Tickets</h2>
   <ngb-accordion class='tickets'>
     <ngb-panel *ngFor="let ticket of tickets"
       [class.selected]="ticket === selectedTicket"

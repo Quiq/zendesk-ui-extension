@@ -47,6 +47,30 @@ export class AuthService {
       .catch(this.handleError);
   }
 
+  getTicketsByPhone(phone: string): Promise<Ticket[]> {
+    if (!localStorage.getItem('zen_token')) {
+      return Promise.reject('No access token available');
+    }
+
+    let headers = new Headers();
+    let new_phone = phone;
+    headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
+    if (phone[0] === '+'){
+      new_phone = phone.slice(1);
+    }
+    const search_string = `type:user phone:${new_phone}`;
+
+    return this.http
+      .get(`${this.envService.ZEN_SITE}/api/v2/search.json?query=${search_string}`, {
+        headers: headers,
+      })
+      .toPromise()
+      .then(response => (
+          response.json().results[0] ? this.getTicketsByName(response.json().results[0].name) : Promise.resolve([])
+      ))
+      .catch(this.handleError);
+  }
+
   getLocalTickets(): Promise<Ticket[]> {
     return this.http
       .get(this.localData)

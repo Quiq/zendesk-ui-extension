@@ -46,6 +46,26 @@ var AuthService = (function () {
             .then(this.extractResults)
             .catch(this.handleError);
     };
+    AuthService.prototype.getTicketsByPhone = function (phone) {
+        var _this = this;
+        if (!localStorage.getItem('zen_token')) {
+            return Promise.reject('No access token available');
+        }
+        var headers = new http_1.Headers();
+        var new_phone = phone;
+        headers.set('Authorization', 'Bearer ' + localStorage.getItem('zen_token'));
+        if (phone[0] === '+') {
+            new_phone = phone.slice(1);
+        }
+        var search_string = "type:user phone:" + new_phone;
+        return this.http
+            .get(this.envService.ZEN_SITE + "/api/v2/search.json?query=" + search_string, {
+            headers: headers,
+        })
+            .toPromise()
+            .then(function (response) { return (response.json().results[0] ? _this.getTicketsByName(response.json().results[0].name) : Promise.resolve([])); })
+            .catch(this.handleError);
+    };
     AuthService.prototype.getLocalTickets = function () {
         return this.http
             .get(this.localData)

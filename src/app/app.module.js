@@ -17,7 +17,6 @@ var app_routing_module_1 = require("./app-routing.module");
 var app_component_1 = require("./app.component");
 var ticket_detail_component_1 = require("./ticket-detail.component");
 var tickets_component_1 = require("./tickets.component");
-var oauth_component_1 = require("./oauth.component");
 var auth_service_1 = require("./auth.service");
 var envs_service_1 = require("./envs.service");
 var AppModule = (function () {
@@ -35,7 +34,7 @@ var AppModule = (function () {
                 material_1.MdTooltipModule,
                 ng_bootstrap_1.NgbModule.forRoot(),
             ],
-            declarations: [app_component_1.AppComponent, tickets_component_1.TicketsComponent, ticket_detail_component_1.TicketDetailComponent, oauth_component_1.OauthComponent],
+            declarations: [app_component_1.AppComponent, tickets_component_1.TicketsComponent, ticket_detail_component_1.TicketDetailComponent],
             bootstrap: [app_component_1.AppComponent],
         })
     ], AppModule);

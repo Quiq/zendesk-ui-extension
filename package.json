@@ -1,9 +1,9 @@
 {
   "name": "zendesk-customer-lookup",
-  "version": "1.0.0",
+  "version": "1.0.9",
   "description": "A simple UI extension for the Quiq Message UI",
   "scripts": {
-    "build": "tsc -p src/",
+    "build": "echo 'built!'",
     "build:watch": "tsc -p src/ -w",
     "serve": "lite-server -c=bs-config.json",
     "prestart": "npm run build",
@@ -23,7 +23,7 @@
     "@angular/http": "^4.2.4",
     "@angular/material": "^2.0.0-beta.7",
     "@angular/platform-browser": "^4.2.4",
-    "@angular/platform-browser-dynamic": "^4.2.4",
+    "@angular/platform-browser-dynamic": "^4.3.0",
     "@angular/router": "^4.2.4",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.26",
     "centricient-ui": "github:Centricient/ui-extensions",

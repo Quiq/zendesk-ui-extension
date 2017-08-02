@@ -9,11 +9,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var tickets_component_1 = require("./tickets.component");
-var oauth_component_1 = require("./oauth.component");
 var routes = [
     { path: 'tickets', component: tickets_component_1.TicketsComponent },
-    { path: 'oauth', component: oauth_component_1.OauthComponent },
-    { path: '', redirectTo: '/tickets', pathMatch: 'full' }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {

@@ -2,11 +2,9 @@
 <html>
   <head>
     <title>Zendesk Customer Lookup</title>
-    <!-- <base href="/zendeskUIExtension/"> -->
     <base href="/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel='shortcut icon' type='image/x-icon' href='./favicon.ico' />
 
     <!-- CDNs -->
     <script src="https://ajax.googleapis.com/ajax/libs/hammerjs/2.0.8/hammer.min.js"></script>
@@ -14,7 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
     <!-- Quiq Extension SDK -->
-    <script src="https://github.com/Quiq/ui-extensions/releases/download/v1.1.1/quiq-sdk-1.1.1.js"></script>
+    <script src="node_modules/centricient-ui/sdk.js"></script>
 
     <!-- Cache busting for iFrame responsiveness -->
     <meta http-Equiv="Cache-Control" Content="no-cache" />
@@ -22,20 +20,17 @@
     <meta http-Equiv="Expires" Content="0" />
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="./styles.css">
-    <link rel="stylesheet" href="./purple-green.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../node_modules/@angular/material/prebuilt-themes/purple-green.css">
 
     <!-- Polyfill(s) for older browsers -->
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
-    <!-- Polyfills -->
-    <script src="https://unpkg.com/core-js/client/shim.min.js"></script>
-
-    <!-- Update these package versions as needed -->
-    <script src="https://unpkg.com/zone.js@0.8.4?main=browser"></script>
-    <script src="https://unpkg.com/systemjs@0.19.39/dist/system.src.js"></script>
-    <script src="./systemjs.config.server.js"></script>
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="systemjs.config.js"></script>
     <script>
-    System.import('./main.js').catch(function(err) {
+    System.import('main.js').catch(function(err) {
   console.error(err);
 });
 </script>

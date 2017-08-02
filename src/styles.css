@@ -1,6 +1,7 @@
 /* Master Styles */
 body {
   background-color: #ebeff0;
+  overflow-x: hidden;
 }
 body, input[text], button {
   color: #231f20;
