@@ -7,8 +7,8 @@
       <ng-template ngbPanelTitle>
         <span
           class="badge {{ticket.priority}} {{ticket.status}} fa fa-{{ticket.icon}} fa-2x"
-          md-tooltip="{{ticket.tooltip}}"
-          mdTooltipPosition="right">
+          matTooltip="{{ticket.tooltip}}"
+          matTooltipPosition="right">
         </span>
         {{ticket.updated_at|date:'shortDate'}}
       </ng-template>

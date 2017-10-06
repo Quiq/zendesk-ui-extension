@@ -31,7 +31,7 @@ var AppModule = (function () {
                 forms_1.FormsModule,
                 http_1.HttpModule,
                 animations_1.BrowserAnimationsModule,
-                material_1.MdTooltipModule,
+                material_1.MatTooltipModule,
                 ng_bootstrap_1.NgbModule.forRoot(),
             ],
             declarations: [app_component_1.AppComponent, tickets_component_1.TicketsComponent, ticket_detail_component_1.TicketDetailComponent],

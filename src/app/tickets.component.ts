@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {MdTooltipModule} from '@angular/material';
+import {MatTooltipModule} from '@angular/material';
 import {Response} from '@angular/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
