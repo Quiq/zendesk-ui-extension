@@ -1,6 +1,6 @@
 {
   "name": "zendesk-customer-lookup",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "A simple UI extension for the Quiq Message UI",
   "scripts": {
     "build": "echo 'built!'",
@@ -9,7 +9,8 @@
     "prestart": "npm run build",
     "start": "concurrently \"npm run build:watch\" \"npm run serve\"",
     "pretest": "npm run build",
-    "lint": "tslint ./src/**/*.ts -t verbose"
+    "lint": "tslint ./src/**/*.ts -t verbose",
+    "preinstall": "npx npm-force-resolutions"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +30,7 @@
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.26",
     "centricient-ui": "github:Centricient/ui-extensions",
     "core-js": "^2.4.1",
+    "npm-force-resolutions": "0.0.3",
     "rxjs": "^5.4.1",
     "systemjs": "^0.19.47",
     "zone.js": "^0.8.12"
@@ -41,6 +43,9 @@
     "lite-server": "^2.5.4",
     "tslint": "^6.1.0",
     "typescript": "^2.4.0"
+  },
+  "resolutions": {
+    "minimist": "1.2.5"
   },
   "repository": {}
 }
