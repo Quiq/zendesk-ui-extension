@@ -19,7 +19,7 @@ var ticket_detail_component_1 = require("./ticket-detail.component");
 var tickets_component_1 = require("./tickets.component");
 var auth_service_1 = require("./auth.service");
 var envs_service_1 = require("./envs.service");
-var AppModule = (function () {
+var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([

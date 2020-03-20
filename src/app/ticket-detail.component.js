@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var ticket_1 = require("./ticket");
 var envs_service_1 = require("./envs.service");
-var TicketDetailComponent = (function () {
+var TicketDetailComponent = /** @class */ (function () {
     function TicketDetailComponent(envService) {
         this.envService = envService;
     }

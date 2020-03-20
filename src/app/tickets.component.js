@@ -13,7 +13,7 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var auth_service_1 = require("./auth.service");
 var envs_service_1 = require("./envs.service");
-var TicketsComponent = (function () {
+var TicketsComponent = /** @class */ (function () {
     function TicketsComponent(authService, router, envService) {
         var _this = this;
         this.authService = authService;

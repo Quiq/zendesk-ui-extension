@@ -12,7 +12,7 @@ var tickets_component_1 = require("./tickets.component");
 var routes = [
     { path: 'tickets', component: tickets_component_1.TicketsComponent },
 ];
-var AppRoutingModule = (function () {
+var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
     }
     AppRoutingModule = __decorate([

@@ -15,7 +15,7 @@ require("rxjs/add/operator/catch");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/toPromise");
 var envs_service_1 = require("./envs.service");
-var AuthService = (function () {
+var AuthService = /** @class */ (function () {
     function AuthService(http, envService) {
         this.http = http;
         this.envService = envService;
