@@ -1,6 +1,6 @@
 {
   "name": "zendesk-customer-lookup",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "A simple UI extension for the Quiq Message UI",
   "scripts": {
     "build": "echo 'built!'",
@@ -40,7 +40,7 @@
     "@types/node": "^6.0.78",
     "canonical-path": "0.0.2",
     "concurrently": "^3.5.0",
-    "lite-server": "^2.5.4",
+    "lite-server": "^2.6.1",
     "tslint": "^6.1.0",
     "typescript": "^2.4.0"
   },
